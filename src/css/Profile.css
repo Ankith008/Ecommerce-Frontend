@@ -1,0 +1,158 @@
+.profileouter {
+  width: 100vw;
+  font-size: 20px;
+}
+.desc {
+  width: 100%;
+  display: flex;
+  background-color: rgb(73, 95, 101);
+  color: black;
+  position: relative;
+  align-items: flex-end;
+}
+.avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 30px;
+}
+.left,
+.right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  height: 100%;
+  align-items: flex-end;
+  margin-top: 100px;
+}
+.right {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+}
+
+span {
+  font-weight: bold;
+  margin: 10px;
+  padding-right: 10px;
+}
+p {
+  text-wrap: wrap;
+}
+.create {
+  margin-top: 20px;
+  color: black;
+  font-size: 30px;
+  cursor: pointer;
+  width: 200px;
+  height: 50px;
+  position: relative;
+  border-radius: 4px;
+  border: 2px solid black;
+}
+.create:hover {
+  background-color: black;
+  color: white;
+}
+
+.page2,
+.page3,
+.page4 {
+  display: flex;
+  text-align: center;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  width: 90%;
+  margin: auto auto 40px auto;
+  transition: cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+}
+.page2:hover,
+.page3:hover,
+.page4:hover {
+  box-shadow: 7px 7px 10px rgb(48, 46, 46), -7px -7px 10px rgb(201, 200, 200);
+}
+.left1,
+.right1,
+.left2,
+.right2,
+.left3,
+.right3 {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  height: 100%;
+}
+
+.createdes {
+  width: 450px;
+}
+.right1 p,
+.right2 p,
+.right3 p {
+  font-size: 25px;
+}
+@media (max-width: 786px) {
+  p {
+    font-size: 17px;
+  }
+  .right1 p,
+  .right2 p,
+  .right3 p {
+    font-size: 20px;
+    padding: 20px;
+  }
+}
+@media (max-width: 652px) {
+  .avatar {
+    width: 200px;
+    height: 200px;
+  }
+  span {
+    display: none;
+  }
+}
+@media (max-width: 465px) {
+  .desc,
+  .page3 {
+    flex-direction: column;
+  }
+  .page2,
+  .page4 {
+    flex-direction: column-reverse;
+  }
+
+  .create {
+    width: 200px;
+  }
+  .page2,
+  .left1,
+  .right1,
+  .page3,
+  .left2,
+  .right2,
+  .left3,
+  .right3 {
+    width: 100vw;
+  }
+
+  .left,
+  .right {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  .left {
+    margin-top: 80px;
+  }
+  .right {
+    margin-top: 20px;
+  }
+}

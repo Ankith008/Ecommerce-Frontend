@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  font-family: "Jost", sans-serif;
+}
+
+.outer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hloobhai {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+.lsf {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 2rem;
+  font-style: italic;
+
+  font-weight: 600;
+}
+.UserSignup {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 7px black, -3px -3px 7px rgb(255, 255, 255);
+  text-align: center;
+}
+
+input {
+  width: 300px;
+  height: 40px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  font-size: 1.1rem;
+  color: black;
+  border: 1px solid black;
+  border-radius: 7px;
+}
+/* input::placeholder {
+  color: rgb(71, 71, 71);
+} */
+.Link {
+  position: absolute;
+  padding: 12px 30px;
+  top: 20px;
+  right: 20px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+}
+.Link p {
+  color: white;
+}
+h2 {
+  margin-bottom: 10px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px black, -1px -1px 3px white;
+  margin: 20px auto;
+  position: relative;
+  overflow: hidden;
+}
+#hloo {
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+  padding: 5px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px black, -1px -1px 3px white;
+}
+.submitbutton {
+  height: 40px;
+  border: transparent;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+.imagespreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

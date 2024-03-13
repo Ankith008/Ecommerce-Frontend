@@ -1,0 +1,114 @@
+.main-page {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../images/banner-5.png");
+  background-position: center;
+  background-size: cover;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-position: right center;
+}
+.main-page .details {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  height: 80%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.details .des {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 30px auto;
+}
+h1 {
+  font-size: 3rem;
+  font-style: italic;
+  margin: auto;
+  text-shadow: 1px 1px 2px white, -1px -1px 3px black;
+}
+.shopnow {
+  padding: 15px 20px;
+  width: 140px;
+  margin: auto;
+  font-size: large;
+  font-style: italic;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  text-align: center;
+  animation: bounce 1s infinite linear alternate;
+  text-wrap: nowrap;
+}
+.options {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  backdrop-filter: blur(7px);
+  z-index: 2;
+}
+.showoptions {
+  font-size: 1.2rem;
+}
+.showoptions p {
+  background-color: rgb(8, 8, 8);
+  color: white;
+  margin-bottom: 5px;
+  padding: 7px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.hloobhai {
+  position: absolute;
+  z-index: 1000;
+  width: 200px;
+  background-color: black;
+  color: white;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(30%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+@media (max-width: 1061px) {
+  .details {
+    backdrop-filter: blur(2px);
+    width: 90%;
+    box-shadow: 0 0 10px black;
+    background-position: right;
+    margin: auto;
+    height: 70%;
+    text-align: center;
+    border-radius: 10px;
+  }
+}
+@media (max-width: 601px) {
+  .details h1 {
+    font-size: 2.4rem;
+  }
+  .details .des {
+    font-size: 1rem;
+  }
+  .details a {
+    padding: 10px 15px;
+  }
+}
+@media (max-width: 350px) {
+  .details {
+    height: 80%;
+  }
+}
