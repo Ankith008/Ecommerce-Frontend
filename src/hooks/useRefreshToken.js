@@ -2,7 +2,7 @@ import { useContext } from "react";
 import axios from "../api/axios";
 import CreateContext from "../Context/CreateContext";
 const useRefreshToken = () => {
-  const { auth, setAuth } = useContext(CreateContext);
+  const { setAuth } = useContext(CreateContext);
   const refresh = async () => {
     const response = await axios.post(
       "/auth/refresh",

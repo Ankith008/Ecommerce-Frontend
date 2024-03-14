@@ -2,16 +2,18 @@ import React, { useContext } from "react";
 import "../css/Home.css";
 import CreateContext from "../Context/CreateContext";
 import { Link } from "react-router-dom";
-// import axios from "../api/axios";
-import useAuth from "../hooks/UseAuth";
+
 import useRefreshToken from "../hooks/useRefreshToken";
 
 export default function Home() {
-  const { showloginoption, setshowloginoption, setloginoptions, setAuth } =
-    useContext(CreateContext);
+  const {
+    showloginoption,
+    setshowloginoption,
+    setloginoptions,
+    setAuth,
+    findorders,
+  } = useContext(CreateContext);
   const refresh = useRefreshToken(setAuth);
-
-  const { findorders } = useAuth();
 
   return (
     <div className="container">
