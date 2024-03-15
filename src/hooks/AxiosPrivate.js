@@ -1,14 +1,18 @@
 import axiosPrivate from "../api/axios";
 import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";
+import { useSelector, useDispatch } from "react-redux";
+import { settingAuth } from "../actions";
 
-const UseAxiosPrivate = (auth, setAuth) => {
+const UseAxiosPrivate = (auth) => {
+  const mystate = useSelector((state) => state.setting);
+  const dispatch = useDispatch();
   const refresh = useRefreshToken();
   useEffect(() => {
     const requestInterceptor = axiosPrivate.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
+          config.headers["Authorization"] = `Bearer ${mystate}`;
         }
         return config;
       },
@@ -23,8 +27,8 @@ const UseAxiosPrivate = (auth, setAuth) => {
           prevRequest._retry = true;
           try {
             const newAccessToken = await refresh();
-            if (setAuth) {
-              setAuth({ accessToken: newAccessToken });
+            if (mystate) {
+              dispatch(settingAuth(newAccessToken));
               prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
               return axiosPrivate(prevRequest);
             }
@@ -41,7 +45,7 @@ const UseAxiosPrivate = (auth, setAuth) => {
       axiosPrivate.interceptors.request.eject(requestInterceptor);
       axiosPrivate.interceptors.response.eject(responseInterceptor);
     };
-  }, [auth, refresh, setAuth]);
+  }, [auth, refresh, mystate, dispatch]);
 
   return axiosPrivate;
 };
