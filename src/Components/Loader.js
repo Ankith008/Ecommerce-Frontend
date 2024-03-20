@@ -1,20 +1,24 @@
-import React from "react";
-import "./Loader.css";
+import React, { useContext } from "react";
+import "../css/Loader.css";
+import CreateContext from "../Context/CreateContext";
 
 export default function Loader() {
+  const { loading } = useContext(CreateContext);
   return (
     <div>
-      <div class="overlay-loader">
-        <div class="loader">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+      {loading && (
+        <div className="overlay-loader">
+          <div className="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

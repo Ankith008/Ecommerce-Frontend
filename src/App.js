@@ -5,8 +5,9 @@ import Navbar from "./Components/Navbar";
 import Signup from "./Components/Signup";
 import ContextState from "./Context/ContextState";
 import Profile from "./Components/Profile";
-
+import Loader from "./Components/Loader";
 import Alert from "./Components/Alert";
+import { useEffect } from "react";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <ContextState>
           <Alert />
           <Navbar />
+          <Loader />
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/sign" element={<Signup />}></Route>

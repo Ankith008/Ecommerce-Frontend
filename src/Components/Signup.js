@@ -4,17 +4,20 @@ import logo from "../images/logo2.png";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
-import ContextState from "../Context/ContextState";
+import CreateContext from "../Context/CreateContext";
+import { useDispatch } from "react-redux";
+import { settingAuth } from "../actions";
 
 export default function Signup() {
+  const dispatch = useDispatch();
   const {
     setshownav,
     loginoptions,
     setalerthead,
     setalertdesc,
     setshowalert,
-    setAuth,
-  } = useContext(ContextState);
+    setloading,
+  } = useContext(CreateContext);
 
   const navigate = useNavigate();
 
@@ -31,6 +34,7 @@ export default function Signup() {
     branch: "",
     inchargename: "",
     categories: [],
+    Address: "",
   });
   const [image, setimage] = useState(null);
 
@@ -78,7 +82,8 @@ export default function Signup() {
 
   const handleusersubmit = async (e) => {
     e.preventDefault();
-    const { name, email, phoneNumber, password } = userdata;
+    setloading(true);
+    const { name, email, phoneNumber, password, Address } = userdata;
 
     const formdata = new FormData();
     formdata.append("profile", image);
@@ -86,22 +91,25 @@ export default function Signup() {
     formdata.append("email", email);
     formdata.append("phoneNumber", phoneNumber);
     formdata.append("password", password);
+    formdata.append("Address", Address);
+
     try {
-      const response = await fetch("http://localhost:5000/auth/createuser", {
-        method: "POST",
-        credentials: "include",
-        body: formdata,
+      const response = await axios.post("/auth/createuser", formdata, {
+        withCredentials: true,
       });
-      const json = await response.json();
+      const json = await response.data;
       if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
         setshowalert("true");
         navigate("/profile");
-        setAuth({ accessToken: json.accessToken });
+        dispatch(settingAuth(json.accessToken));
+        setloading(false);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
+        setshowalert("true");
+        setloading(false);
       }
       return;
     } catch (error) {
@@ -111,7 +119,7 @@ export default function Signup() {
 
   const handleuserlogin = async (e) => {
     e.preventDefault();
-
+    setloading(true);
     const { email, password } = userdata;
     try {
       const response = await axios.post(
@@ -128,12 +136,14 @@ export default function Signup() {
       if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Logged In");
-        setshowalert("true");
+        setshowalert(false);
         // navigate("/profile");
-        setAuth({ accessToken: json.accessToken });
+        dispatch(settingAuth(json.accessToken));
+        setloading(false);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
+        setshowalert(false);
       }
       return;
     } catch (error) {
@@ -142,30 +152,26 @@ export default function Signup() {
   };
   const handleDeliverylogin = async (e) => {
     e.preventDefault();
-
+    setloading(true);
     const { email, password } = userdata;
     try {
-      const response = await fetch(
-        "http://127.0.0.1:5000/auth/logindeliveryboy",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            deliveryboyemail: email,
-            deliveryboypassword: password,
-          }),
-        }
+      const response = await axios.post(
+        "/auth/logindeliveryboy",
+        { deliveryboyemail: email, deliveryboypassword: password },
+        { withCredentials: true }
       );
-      const json = await response.json();
+      const json = await response.data;
       if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Logged In");
         setshowalert("true");
         navigate("/profile");
+        dispatch(settingAuth(json.accessToken));
+        setloading(false);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
+        setshowalert(false);
       }
       return;
     } catch (error) {
@@ -174,7 +180,7 @@ export default function Signup() {
   };
   const handlecompanylogin = async (e) => {
     e.preventDefault();
-
+    setloading(true);
     const { email, password } = userdata;
     try {
       const response = await axios.post(
@@ -185,7 +191,6 @@ export default function Signup() {
         },
         {
           withCredentials: true,
-          headers: { "Content-Type": "application/json" },
         }
       );
 
@@ -195,10 +200,12 @@ export default function Signup() {
         setalertdesc("You have successfully logged in");
         setshowalert("true");
         navigate("/profile");
-        setAuth({ accessToken: json.accessToken });
+        dispatch(settingAuth(json.accessToken));
+        setloading(false);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
+        setshowalert(false);
       }
       return;
     } catch (error) {
@@ -207,6 +214,7 @@ export default function Signup() {
   };
   const handleDeliverysign = async (e) => {
     e.preventDefault();
+    setloading(true);
     const { name, email, phoneNumber, password, Deliveryprice, AreaDelivery } =
       userdata;
 
@@ -219,20 +227,17 @@ export default function Signup() {
     formdata.append("deliveryboyAreaDelivery", AreaDelivery);
     formdata.append("deliveryboyPrices", Deliveryprice);
     try {
-      const response = await fetch(
-        "http://localhost:5000/auth/createdeliveryboy",
-        {
-          method: "POST",
-          credentials: "include",
-          body: formdata,
-        }
-      );
-      const json = await response.json();
+      const response = await axios.post("/auth/createdeliveryboy", formdata, {
+        withCredentials: true,
+      });
+      const json = await response.data;
       if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
         setshowalert("true");
         navigate("/profile");
+        dispatch(settingAuth(json.accessToken));
+        setloading(false);
       }
       return;
     } catch (error) {
@@ -241,6 +246,7 @@ export default function Signup() {
   };
   const handlecompanysignup = async (e) => {
     e.preventDefault();
+    setloading(true);
     const { name, email, password, location, ownername, ownernum } = userdata;
 
     const formdata = new FormData();
@@ -252,20 +258,21 @@ export default function Signup() {
     formdata.append("companyownernumber", ownernum);
     formdata.append("companylocation", location);
     try {
-      const response = await fetch("http://localhost:5000/auth/createcompany", {
-        method: "POST",
-        credentials: "include",
-        body: formdata,
+      const response = await axios.post("/auth/createcompany", formdata, {
+        withCredentials: true,
       });
-      const json = await response.json();
+      const json = await response.data;
       if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
         setshowalert("true");
         navigate("/profile");
+        dispatch(settingAuth(json.accessToken));
+        setloading(false);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
+        setshowalert(false);
       }
       return;
     } catch (error) {
@@ -275,6 +282,7 @@ export default function Signup() {
 
   const handletext = async (e) => {
     e.preventDefault();
+    setloading(true);
     const {
       name,
       email,
@@ -297,7 +305,7 @@ export default function Signup() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/auth/createStore",
+        "/auth/createStore",
         formdata,
 
         {
@@ -308,13 +316,17 @@ export default function Signup() {
       if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Created Store");
-        setshowalert("true");
+        setshowalert(true);
         navigate("/profile");
+        dispatch(settingAuth(json.accessToken));
+        setloading(false);
       } else {
         setalerthead("ERROR");
         setalertdesc("There is an error in Creating Store");
+        setshowalert(true);
       }
     } catch (error) {
+      setloading(false);
       console.log(error);
     }
   };
@@ -376,6 +388,14 @@ export default function Signup() {
             name="password"
             required
             id="password"
+            onChange={onchange}
+          />
+          <input
+            type="text"
+            placeholder="Address"
+            name="Address"
+            required
+            id="Address"
             onChange={onchange}
           />
           <button className="submitbutton" type="submit">

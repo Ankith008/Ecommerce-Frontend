@@ -6,9 +6,18 @@ import cross from "../images/cross.png";
 import CreateContext from "../Context/CreateContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { settingAuth } from "../actions";
 
 export default function Navbar() {
-  const { setshowloginoption, shownav } = useContext(CreateContext);
+  const dispatch = useDispatch();
+  const {
+    setshowloginoption,
+    shownav,
+    setalerthead,
+    setalertdesc,
+    setshowalert,
+  } = useContext(CreateContext);
   const [showhum, setshowhum] = useState(true);
   const navigate = useNavigate();
 
@@ -21,9 +30,17 @@ export default function Navbar() {
           withCredentials: true,
         }
       );
-      if (response.data.success) window.location.href = response.data.redirect;
-      console.log("response", response.data);
+      if (response.data.success) {
+        dispatch(settingAuth(""));
+        // window.location.href = response.data.redirect;
+        setalertdesc("You have been logged out successfully");
+        setalerthead("Success");
+        setshowalert(true);
+      }
     } catch (error) {
+      setalerthead("Error");
+      setalertdesc("Error logging out, Please Try Again");
+      setshowalert(true);
       console.error("Error logging out:", error);
     }
   };
