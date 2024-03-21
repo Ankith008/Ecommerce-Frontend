@@ -5,8 +5,8 @@
 .desc {
   width: 100%;
   display: flex;
-  background-color: rgb(73, 95, 101);
-  color: black;
+  background-color: rgba(0, 0, 0, 0.721);
+  color: white;
   position: relative;
   align-items: flex-end;
 }

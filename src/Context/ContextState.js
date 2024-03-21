@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CreateContext from "./CreateContext";
-import Alert from "../Components/Alert";
 import useaxiosPrivate from "../hooks/AxiosPrivate";
 
 const ContextState = (props) => {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "../css/Home.css";
 import CreateContext from "../Context/CreateContext";
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ export default function Home() {
   disableReactDevTools();
 
   const refresh = useRefreshToken();
-  if (mystate.length == 0) {
+  if (mystate.length === 0) {
     refresh();
   }
 
