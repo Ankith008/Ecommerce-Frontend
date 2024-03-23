@@ -11,3 +11,10 @@ export const settingstore = (data) => {
     payload: data,
   };
 };
+
+export const settingstoreid = (data) => {
+  return {
+    type: "SETTING_STORE_ID",
+    payload: data,
+  };
+};

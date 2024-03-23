@@ -1,22 +1,46 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "../css/Home.css";
 import CreateContext from "../Context/CreateContext";
 import { Link } from "react-router-dom";
-import useRefreshToken from "../hooks/useRefreshToken";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
-import { useSelector } from "react-redux";
+import axios from "../api/axios";
+import { settingAuth } from "../actions/index";
+import useRefreshToken from "../hooks/useRefreshToken";
+import { useDispatch } from "react-redux";
 
 export default function Home() {
-  const mystate = useSelector((state) => state.setting);
-  const { showloginoption, setshowloginoption, setloginoptions, findorders } =
-    useContext(CreateContext);
+  const dispatch = useDispatch();
+  const {
+    showloginoption,
+    setshowloginoption,
+    setloginoptions,
+    findorders,
+    setalerthead,
+    setalertdesc,
+    setshowalert,
+  } = useContext(CreateContext);
 
   disableReactDevTools();
-
   const refresh = useRefreshToken();
-  if (mystate.length === 0) {
-    refresh();
-  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          "/auth/refresh",
+          {},
+          { withCredentials: true }
+        );
+
+        dispatch(settingAuth(response.data.accessToken));
+      } catch (error) {
+        setalerthead("Error");
+        setalertdesc("Please Try Login Again");
+        setshowalert(true);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="container">
@@ -90,7 +114,7 @@ export default function Home() {
           </div>
         </section>
         <section className="followed"></section>
-        {/* <button onClick={() => refresh()}>refresh</button> */}
+        <button onClick={() => refresh()}>refresh</button>
         <button onClick={findorders}>find</button>
       </main>
     </div>

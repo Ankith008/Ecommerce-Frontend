@@ -25,8 +25,8 @@ export default function Profile() {
     setloading(true);
     try {
       const response = await axiosPrivate.get("/find/stores");
-      console.log("response", response.data.stores);
       dispatch(settingstore(response.data.stores));
+      localStorage.setItem("stores", JSON.stringify(response.data.stores));
       setloading(false);
       navigate("/store");
     } catch (error) {

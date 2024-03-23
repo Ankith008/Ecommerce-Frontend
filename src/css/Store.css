@@ -1,8 +1,7 @@
 .heading {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 75px;
   font-size: 3rem;
-  font-weight: 600;
 }
 .contentbox {
   width: 100%;
@@ -11,4 +10,5 @@
   justify-content: center;
   gap: 20px;
   padding-top: 30px;
+  height: 100vh !important;
 }
