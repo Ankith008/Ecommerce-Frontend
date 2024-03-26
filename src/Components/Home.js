@@ -21,7 +21,6 @@ export default function Home() {
   } = useContext(CreateContext);
 
   disableReactDevTools();
-  const refresh = useRefreshToken();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -114,8 +113,8 @@ export default function Home() {
           </div>
         </section>
         <section className="followed"></section>
-        <button onClick={() => refresh()}>refresh</button>
-        <button onClick={findorders}>find</button>
+        {/* <button onClick={() => refresh()}>refresh</button> */}
+        {/* <button onClick={findorders}>find</button> */}
       </main>
     </div>
   );

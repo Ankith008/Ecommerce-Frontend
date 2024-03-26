@@ -8,7 +8,7 @@ export default function Stores() {
   const stores = JSON.parse(localStorage.getItem("stores"));
   return (
     <div className="storeouter">
-      <h1 className="heading">Stores</h1>
+      {/* <h1 className="heading">Stores</h1> */}
       <div className="contentbox">
         {stores?.length < mystate?.length
           ? mystate?.length > 0 &&

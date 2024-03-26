@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../css/Card.css";
 import { useDispatch, useSelector } from "react-redux";
 import { settingstoreid } from "../actions/index";
@@ -6,25 +6,33 @@ import axiosPrivate from "../api/axios";
 
 export default function Card(props) {
   const mystate = useSelector((state) => state.settingstoreid);
+  const localstoreid = localStorage.getItem("storeid");
+  const isMounted = useRef(false);
 
   const fetchData = async () => {
-    if (mystate) {
-      try {
-        const response = await axiosPrivate.get(`/find/store/${mystate}`);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error finding store:", error);
-      }
-    }
+    const response = await axiosPrivate.get(
+      `/find/store/${!localstoreid ? mystate : localstoreid}`
+    );
+    console.log(response.data);
   };
+  useEffect(() => {
+    if (!isMounted.current) {
+      fetchData();
+      isMounted.current = true;
+    }
+  }, []);
 
   const cardRef = useRef();
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const element = cardRef.current;
     if (element) {
       dispatch(settingstoreid(props.unique));
+      localStorage.setItem("storeid", props.unique);
+      if (!isMounted.current) {
+        fetchData();
+      }
     }
   };
   return (
@@ -33,7 +41,6 @@ export default function Card(props) {
       ref={cardRef}
       onClick={async () => {
         await handleClick();
-        await fetchData();
       }}
     >
       <div className="image">
