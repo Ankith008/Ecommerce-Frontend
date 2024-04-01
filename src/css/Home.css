@@ -2,7 +2,7 @@
   width: 100%;
   height: 100vh;
   background-image: url("../images/banner-5.png");
-  background-position: center;
+  /* background-position: center; */
   background-size: cover;
   padding: 5%;
   display: flex;
@@ -10,11 +10,12 @@
   justify-content: center;
   background-position: right center;
 }
-.main-page .details {
+.details {
   display: flex;
   flex-direction: column;
   width: 550px;
   height: 80%;
+  scrollbar-width: none;
 }
 
 .container {
@@ -56,16 +57,27 @@ h1 {
   backdrop-filter: blur(7px);
   z-index: 2;
 }
-.showoptions {
-  font-size: 1.2rem;
+
+.crossback {
+  border-radius: 50%;
+  width: 50px;
+  margin: 10px auto;
+  padding: 5px;
 }
+
 .showoptions p {
   background-color: rgb(8, 8, 8);
   color: white;
   margin-bottom: 5px;
-  padding: 7px 15px;
+  padding: 15px 27px;
   border-radius: 10px;
   cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.showoptions {
+  display: flex;
+  flex-direction: column;
 }
 
 .hloobhai {
@@ -91,7 +103,7 @@ h1 {
     box-shadow: 0 0 10px black;
     background-position: right;
     margin: auto;
-    height: 70%;
+
     text-align: center;
     border-radius: 10px;
   }

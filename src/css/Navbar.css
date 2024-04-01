@@ -82,10 +82,8 @@ li:hover::after {
   .larger li {
     display: none;
   }
-
   .humimage {
     display: flex;
-
     border-radius: 2px;
   }
   .smaller {

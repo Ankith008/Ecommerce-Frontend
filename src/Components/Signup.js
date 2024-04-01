@@ -1,14 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "../css/Signup.css";
 import logo from "../images/logo2.png";
 import { Link } from "react-router-dom";
-import axios from "../api/axios";
+import axios, { axiosPrivate } from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import CreateContext from "../Context/CreateContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { settingAuth } from "../actions";
 
 export default function Signup() {
+  const hloo = useRef();
+  const accessToken = useSelector((state) => state.setting);
+  const storeid = localStorage.getItem("storeid");
   const dispatch = useDispatch();
   const {
     setshownav,
@@ -35,33 +38,28 @@ export default function Signup() {
     inchargename: "",
     categories: [],
     Address: "",
+    size: "",
+    price: "",
+    productcat: "",
+    productdec: "",
   });
   const [image, setimage] = useState(null);
+  const [images, setimages] = useState([]);
+  const localsigup = localStorage.getItem("signup");
 
   useEffect(() => {
     setshownav(false);
   }, [setshownav]);
 
-  useEffect(() => {
-    if (
-      loginoptions === "User_signup" ||
-      loginoptions === "Company_Signup" ||
-      loginoptions === "Delivery_Signup" ||
-      loginoptions === "Store_Signup"
-    ) {
-      document.querySelector("#hloo").addEventListener("click", function () {
-        document.querySelector("#inputprofile").click();
-      });
-    }
-  }, [loginoptions]);
+  const element = hloo.current;
+  if (element) {
+    element.addEventListener("click", function () {
+      document.querySelector("#inputprofile").click();
+    });
+  }
 
   useEffect(() => {
-    if (
-      loginoptions === "User_signup" ||
-      loginoptions === "Company_Signup" ||
-      loginoptions === "Delivery_Signup" ||
-      loginoptions === "Store_Signup"
-    ) {
+    if (!localsigup === "productcreate") {
       const imagespreview = document.querySelector(".imagespreview");
       const inputprofile = document.querySelector("#inputprofile");
       inputprofile.addEventListener("change", function () {
@@ -74,11 +72,29 @@ export default function Signup() {
         }
       });
     }
-  }, [image, loginoptions]);
-
+  }, [localsigup]);
   const onchange = (e) => {
     setuserdata({ ...userdata, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          "/auth/refresh",
+          {},
+          { withCredentials: true }
+        );
+
+        dispatch(settingAuth(response.data.accessToken));
+      } catch (error) {
+        setalerthead("Error");
+        setalertdesc("Please Try Login Again");
+        setshowalert(true);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleusersubmit = async (e) => {
     e.preventDefault();
@@ -331,6 +347,74 @@ export default function Signup() {
     }
   };
 
+  const handlecreateproduct = async (e) => {
+    e.preventDefault();
+    const inputProfile = document.querySelector("#inputprofile");
+    const files = inputProfile.files;
+
+    if (files.length > 0) {
+      const newImages = [...images];
+      const imagePreviews = document.querySelectorAll(".imagespreviews");
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        newImages.push(file);
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          imagePreviews[i].src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+      setimages(newImages);
+    }
+  };
+
+  const handleproductsubmit = async (e) => {
+    setloading(true);
+    e.preventDefault();
+    const { name, size, price, productcat, productdec } = userdata;
+    try {
+      const formdata = new FormData();
+      images.forEach((image) => {
+        formdata.append("profile", image);
+      });
+      formdata.append("Productname", name);
+      formdata.append("Productsize", size);
+      formdata.append("Productprice", price);
+      formdata.append("describtion", productdec);
+      formdata.append("ProductCategorie", productcat);
+      formdata.append("Storesname", storeid);
+
+      const response = await axiosPrivate.post(
+        "/auth/createproduct",
+        formdata,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const json = await response.data;
+      setloading(false);
+      if (json.success) {
+        setalerthead("SUCCESS");
+        setalertdesc("Your Product Has Been Created Successfully");
+        setshowalert("true");
+        // navigate("/storeprofile");
+      }
+    } catch (error) {
+      setloading(false);
+      setalerthead("ERROR");
+      setalertdesc("There is an error in Creating Product");
+      setshowalert("true");
+    }
+  };
+
+  const defaultimage =
+    "https://www.pacifictrellisfruit.com/wp-content/uploads/2016/04/default-placeholder-300x300.png";
+
   return (
     <div className="outer">
       <p className="lsf">
@@ -342,7 +426,7 @@ export default function Signup() {
           <p>Back</p>
         </Link>
       </div>
-      {loginoptions === "User_signup" && (
+      {localsigup === "User_signup" && (
         <form
           className="UserSignup"
           onSubmit={handleusersubmit}
@@ -355,7 +439,7 @@ export default function Signup() {
               className="imagespreview"
               alt="profile"
             />
-            <i id="hloo" className="fa-solid fa-pen"></i>
+            <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
           </div>
           <input hidden type="file" name="profile" id="inputprofile" />
           <input
@@ -403,7 +487,7 @@ export default function Signup() {
           </button>
         </form>
       )}
-      {loginoptions === "User_Login" && (
+      {localsigup === "User_Login" && (
         <form className="UserSignup" onSubmit={handleuserlogin}>
           <h2>User Login</h2>
           <input
@@ -428,7 +512,7 @@ export default function Signup() {
           </button>
         </form>
       )}
-      {loginoptions === "Company_Signup" && (
+      {localsigup === "Company_Signup" && (
         <form
           className="UserSignup"
           onSubmit={handlecompanysignup}
@@ -441,7 +525,7 @@ export default function Signup() {
               className="imagespreview"
               alt="profile"
             />
-            <i id="hloo" className="fa-solid fa-pen"></i>
+            <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
           </div>
           <input hidden type="file" name="profile" id="inputprofile" />
           <input
@@ -498,7 +582,7 @@ export default function Signup() {
           </button>
         </form>
       )}
-      {loginoptions === "Company_Login" && (
+      {localsigup === "Company_Login" && (
         <form className="UserSignup" onSubmit={handlecompanylogin}>
           <h2>Company Login</h2>
 
@@ -524,7 +608,7 @@ export default function Signup() {
           </button>
         </form>
       )}
-      {loginoptions === "Delivery_Signup" && (
+      {localsigup === "Delivery_Signup" && (
         <form
           className="UserSignup"
           onSubmit={handleDeliverysign}
@@ -537,7 +621,7 @@ export default function Signup() {
               className="imagespreview"
               alt="profile"
             />
-            <i id="hloo" className="fa-solid fa-pen"></i>
+            <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
           </div>
           <input hidden type="file" name="profile" id="inputprofile" />
           <input
@@ -593,7 +677,7 @@ export default function Signup() {
           </button>
         </form>
       )}
-      {loginoptions === "Delivery_Login" && (
+      {localsigup === "Delivery_Login" && (
         <form className="UserSignup" onSubmit={handleDeliverylogin}>
           <h2>Delivery Gay Login</h2>
 
@@ -619,7 +703,7 @@ export default function Signup() {
           </button>
         </form>
       )}
-      {loginoptions === "Store_Signup" && (
+      {localsigup === "Store_Signup" && (
         <form
           className="UserSignup"
           onSubmit={handletext}
@@ -632,7 +716,7 @@ export default function Signup() {
               className="imagespreview"
               alt="profile"
             />
-            <i id="hloo" className="fa-solid fa-pen"></i>
+            <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
           </div>
           <input hidden type="file" name="profile" id="inputprofile" />
           <input
@@ -694,6 +778,106 @@ export default function Signup() {
 
           <button className="submitbutton" type="submit">
             Signup
+          </button>
+        </form>
+      )}
+      {localsigup === "productcreate" && (
+        <form
+          className="UserSignup"
+          onSubmit={handleproductsubmit}
+          encType="multipart/form-data"
+        >
+          <h2>Create Product</h2>
+          <div className="boxs">
+            <div className="page1 page">
+              <img
+                src={defaultimage}
+                className="imagespreviews imagespreview1"
+                alt="profile"
+              />
+            </div>
+            <div className="page2 page">
+              <img
+                src={defaultimage}
+                className="imagespreviews imagespreview2"
+                alt="profile"
+              />
+            </div>
+            <div className="page3 page">
+              <img
+                src={defaultimage}
+                className="imagespreviews imagespreview3"
+                alt="profile"
+              />
+            </div>
+            <div className="page4 page">
+              <img
+                src={defaultimage}
+                className="imagespreviews imagespreview4"
+                alt="profile"
+              />
+            </div>
+            <div className="page5 page">
+              <img
+                src={defaultimage}
+                className="imagespreviews imagespreview5"
+                alt="profile"
+              />
+            </div>
+
+            <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
+          </div>
+          <input
+            hidden
+            type="file"
+            name="profile"
+            id="inputprofile"
+            onChange={handlecreateproduct}
+            multiple
+          />
+          <input
+            type="text"
+            placeholder="Product Name"
+            name="name"
+            id="name"
+            required
+            onChange={onchange}
+          />
+          <input
+            type="text"
+            placeholder="Size Eg:S,M,L"
+            name="size"
+            id="name"
+            required
+            onChange={onchange}
+          />
+          <input
+            type="Number"
+            placeholder="Product Price"
+            name="price"
+            id="name"
+            onChange={onchange}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Product Type Eg:Shirt,Trousers"
+            name="productcat"
+            id="phoneNumber"
+            required
+            onChange={onchange}
+          />
+          <textarea
+            name="productdec"
+            id="textdes"
+            cols="30"
+            rows="5"
+            onChange={onchange}
+            placeholder="Describe about your Product"
+          ></textarea>
+
+          <button className="submitbutton" type="submit">
+            Create Product
           </button>
         </form>
       )}

@@ -77,7 +77,14 @@ export default function Navbar() {
             <li>Your Carts</li>
           </ul>
           <ul className="last">
-            <li onClick={() => setshowloginoption(true)}>Sign Up</li>
+            <li
+              onClick={() => {
+                setshowloginoption(true);
+                navigate("/");
+              }}
+            >
+              Sign Up
+            </li>
             <li onClick={() => handlelogout()}>Logout</li>
           </ul>
         </nav>
@@ -111,6 +118,7 @@ export default function Navbar() {
               onClick={() => {
                 setshowhum(!showhum);
                 setshowloginoption(true);
+                navigate("/");
               }}
             >
               Sign Up

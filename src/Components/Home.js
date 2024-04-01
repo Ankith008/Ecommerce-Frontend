@@ -1,20 +1,21 @@
 import React, { useContext, useEffect } from "react";
 import "../css/Home.css";
 import CreateContext from "../Context/CreateContext";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 import axios from "../api/axios";
 import { settingAuth } from "../actions/index";
 import useRefreshToken from "../hooks/useRefreshToken";
 import { useDispatch } from "react-redux";
+import cross from "../images/remove.png";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     showloginoption,
     setshowloginoption,
     setloginoptions,
-    findorders,
     setalerthead,
     setalertdesc,
     setshowalert,
@@ -47,53 +48,74 @@ export default function Home() {
         {showloginoption && (
           <section className="options">
             <div className="showoptions">
-              <p onClick={() => setshowloginoption(false)}>
-                <Link to="/sign" onClick={() => setloginoptions("User_Login")}>
-                  <p>User Login</p>
-                </Link>
-              </p>
-              <p onClick={() => setshowloginoption(false)}>
-                <Link
-                  to="/sign"
-                  onClick={() => {
-                    setloginoptions("User_signup");
+              <img
+                src={cross}
+                alt="cross"
+                className="crossback"
+                onClick={() => setshowloginoption(false)}
+              />
+              <div className="showoptions1">
+                <p
+                  onClick={async () => {
+                    setshowloginoption(false);
+                    await setloginoptions("User_Login");
+                    localStorage.setItem("signup", "User_Login");
+                    navigate("/sign");
                   }}
                 >
-                  <p>User Signup</p>
-                </Link>
-              </p>
-              <p onClick={() => setshowloginoption(false)}>
-                <Link
-                  to="/sign"
-                  onClick={() => setloginoptions("Company_Signup")}
+                  User Login
+                </p>
+                <p
+                  onClick={async () => {
+                    setshowloginoption(false);
+                    await setloginoptions("User_signup");
+                    localStorage.setItem("signup", "User_signup");
+                    navigate("/sign");
+                  }}
                 >
-                  <p>Company Signup</p>
-                </Link>
-              </p>
-              <p onClick={() => setshowloginoption(false)}>
-                <Link
-                  to="/sign"
-                  onClick={() => setloginoptions("Company_Login")}
+                  User Signup
+                </p>
+                <p
+                  onClick={async () => {
+                    setshowloginoption(false);
+                    await setloginoptions("Company_Signup");
+                    localStorage.setItem("signup", "Company_Signup");
+                    navigate("/sign");
+                  }}
                 >
-                  <p>Company Login</p>
-                </Link>
-              </p>
-              <p onClick={() => setshowloginoption(false)}>
-                <Link
-                  to="/sign"
-                  onClick={() => setloginoptions("Delivery_Signup")}
+                  Company Signup
+                </p>
+                <p
+                  onClick={async () => {
+                    setshowloginoption(false);
+                    await setloginoptions("Company_Login");
+                    localStorage.setItem("signup", "Company_Login");
+                    navigate("/sign");
+                  }}
                 >
-                  <p>Delivery gay Signup</p>
-                </Link>
-              </p>
-              <p onClick={() => setshowloginoption(false)}>
-                <Link
-                  to="/sign"
-                  onClick={() => setloginoptions("Delivery_Login")}
+                  Company Login
+                </p>
+                <p
+                  onClick={async () => {
+                    setshowloginoption(false);
+                    await setloginoptions("Delivery_Signup");
+                    localStorage.setItem("signup", "Delivery_Signup");
+                    navigate("/sign");
+                  }}
                 >
-                  <p>Delivery gay Login</p>
-                </Link>
-              </p>
+                  Delivery Boy Signup
+                </p>
+                <p
+                  onClick={async () => {
+                    setshowloginoption(false);
+                    await setloginoptions("Delivery_Login");
+                    localStorage.setItem("signup", "Delivery_Login");
+                    navigate("/sign");
+                  }}
+                >
+                  Delivery Boy Login
+                </p>
+              </div>
             </div>
           </section>
         )}

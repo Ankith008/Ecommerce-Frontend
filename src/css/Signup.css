@@ -43,9 +43,7 @@ input {
   border: 1px solid black;
   border-radius: 7px;
 }
-/* input::placeholder {
-  color: rgb(71, 71, 71);
-} */
+
 .Link {
   position: absolute;
   padding: 12px 30px;
@@ -71,8 +69,27 @@ h2 {
   box-shadow: 1px 1px 3px black, -1px -1px 3px white;
   margin: 20px auto;
   position: relative;
-  overflow: hidden;
+  overflow-x: scroll;
 }
+.boxs {
+  display: flex;
+  width: 300px;
+  gap: 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  position: relative;
+}
+.page {
+  min-width: 100%;
+  overflow: hidden;
+  scroll-snap-align: center;
+}
+.imagespreviews {
+  object-fit: cover;
+  width: 270px;
+  height: 270px;
+}
+
 #hloo {
   position: absolute;
   right: 20px;
@@ -81,6 +98,19 @@ h2 {
   background-color: white;
   border-radius: 50%;
   box-shadow: 1px 1px 3px black, -1px -1px 3px white;
+}
+#textdes::placeholder {
+  font-size: large;
+}
+#textdes {
+  width: 300px;
+  height: 100px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  font-size: 1.1rem;
+  color: black;
+  border: 1px solid black;
+  border-radius: 7px;
 }
 .submitbutton {
   height: 40px;

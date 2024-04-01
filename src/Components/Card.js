@@ -1,26 +1,29 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "../css/Card.css";
 import { useDispatch, useSelector } from "react-redux";
 import { settingstoreid } from "../actions/index";
-import axiosPrivate from "../api/axios";
+import axios from "../api/axios";
+import CreateContext from "../Context/CreateContext";
+import { useNavigate } from "react-router-dom";
+import { settingstoredetail } from "../actions/index";
 
 export default function Card(props) {
   const mystate = useSelector((state) => state.settingstoreid);
   const localstoreid = localStorage.getItem("storeid");
-  const isMounted = useRef(false);
+  const { setloading } = useContext(CreateContext);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
-    const response = await axiosPrivate.get(
+    setloading(true);
+    const response = await axios.get(
       `/find/store/${!localstoreid ? mystate : localstoreid}`
     );
-    console.log(response.data);
-  };
-  useEffect(() => {
-    if (!isMounted.current) {
-      fetchData();
-      isMounted.current = true;
+    if (response.data) {
+      dispatch(settingstoredetail(response.data.store));
+      navigate("/storeprofile");
     }
-  }, []);
+    setloading(false);
+  };
 
   const cardRef = useRef();
   const dispatch = useDispatch();
@@ -30,9 +33,7 @@ export default function Card(props) {
     if (element) {
       dispatch(settingstoreid(props.unique));
       localStorage.setItem("storeid", props.unique);
-      if (!isMounted.current) {
-        fetchData();
-      }
+      fetchData();
     }
   };
   return (

@@ -3,11 +3,16 @@ import "../css/Profile.css";
 import CreateContext from "../Context/CreateContext";
 import { useNavigate } from "react-router-dom";
 import axiosPrivate from "../api/axios";
-import { useDispatch } from "react-redux";
-import { settingstore } from "../actions/index";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  settingstore,
+  settingAuth,
+  settingstoredetail,
+} from "../actions/index";
 
 export default function Profile() {
   const dispatch = useDispatch();
+  const mystate = useSelector((state) => state.settingstoredetail);
   const {
     setloginoptions,
     setshownav,
@@ -17,8 +22,36 @@ export default function Profile() {
     setshowalert,
   } = useContext(CreateContext);
   const navigate = useNavigate();
+
+  const finddetails = async () => {
+    try {
+      const response = await axiosPrivate.post("auth/finddetail");
+      dispatch(settingstoredetail(response.data.company));
+    } catch (error) {
+      console.error("Error finding details:", error);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await axiosPrivate.post(
+        "/auth/refresh",
+        {},
+        { withCredentials: true }
+      );
+      const json = await response.data;
+      await dispatch(settingAuth(json.accessToken));
+      finddetails();
+    } catch (error) {
+      setalerthead("Error");
+      setalertdesc("Please Try Login Again");
+      setshowalert(true);
+    }
+  };
+
   useEffect(() => {
     setshownav(true);
+    fetchData();
   }, []);
 
   const findstores = async () => {
@@ -45,7 +78,11 @@ export default function Profile() {
       <section className="desc">
         <div className="left">
           <img
-            src="https://www.w3schools.com/howto/img_avatar.png"
+            src={
+              !mystate.profile
+                ? "https://www.w3schools.com/howto/img_avatar.png"
+                : mystate.profile
+            }
             alt="Avatar"
             className="avatar"
           />
@@ -53,19 +90,24 @@ export default function Profile() {
         <div className="right">
           <div className="companydetails">
             <p>
-              <span>Company Name:</span>Sri Lata Krian Shop
+              <span>Company Name :</span>
+              {mystate.companyname}
             </p>
             <p>
-              <span>Company Owner:</span>Ankith Patel
+              <span>Company Owner :</span>
+              {mystate.companyowner}
             </p>
             <p>
-              <span>Company Email:</span>Ankith@gmail.com
+              <span>Company Email :</span>
+              {mystate.companyemail}
             </p>
             <p>
-              <span>Company Contact:</span>1234567890
+              <span>Company Contact :</span>
+              {mystate.companyownernumber}
             </p>
             <p>
-              <span>Company Location:</span>Ayodhya Nagar ,Quthbullaput
+              <span>Company Location :</span>
+              {mystate.companylocation}
             </p>
           </div>
         </div>
@@ -88,7 +130,7 @@ export default function Profile() {
           <p
             className="create"
             onClick={() => {
-              setloginoptions("Store_Signup");
+              localStorage.setItem("signup", "Store_Signup");
               navigate("/sign");
             }}
           >

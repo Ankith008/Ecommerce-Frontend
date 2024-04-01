@@ -18,3 +18,9 @@ export const settingstoreid = (data) => {
     payload: data,
   };
 };
+export const settingstoredetail = (data) => {
+  return {
+    type: "SETTING_STORE_DETAIL",
+    payload: data,
+  };
+};

@@ -9,6 +9,7 @@ import Loader from "./Components/Loader";
 import Alert from "./Components/Alert";
 import Stores from "./Components/Stores";
 import Card from "./Components/Card";
+import Storeprofile from "./Components/Storeprofile";
 
 function App() {
   return (
@@ -20,6 +21,11 @@ function App() {
           <Loader />
           <Routes>
             <Route exact path="/card" element={<Card />}></Route>
+            <Route
+              exact
+              path="/storeprofile"
+              element={<Storeprofile />}
+            ></Route>
             <Route exact path="/store" element={<Stores />}></Route>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/sign" element={<Signup />}></Route>
