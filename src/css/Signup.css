@@ -54,6 +54,7 @@ input {
   background-color: black;
   color: white;
   text-decoration: none;
+  z-index: 3;
 }
 .Link p {
   color: white;
@@ -69,7 +70,7 @@ h2 {
   box-shadow: 1px 1px 3px black, -1px -1px 3px white;
   margin: 20px auto;
   position: relative;
-  overflow-x: scroll;
+  overflow: hidden;
 }
 .boxs {
   display: flex;

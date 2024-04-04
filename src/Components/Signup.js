@@ -402,7 +402,7 @@ export default function Signup() {
         setalerthead("SUCCESS");
         setalertdesc("Your Product Has Been Created Successfully");
         setshowalert("true");
-        // navigate("/storeprofile");
+        navigate("/storeprofile");
       }
     } catch (error) {
       setloading(false);
@@ -411,6 +411,13 @@ export default function Signup() {
       setshowalert("true");
     }
   };
+
+  useEffect(() => {
+    if (localsigup === "productcreate" && window.innerWidth < 450) {
+      const outer = document.querySelector(".outer");
+      outer.style.marginTop = "100px";
+    }
+  }, [localsigup, window.innerWidth]);
 
   const defaultimage =
     "https://www.pacifictrellisfruit.com/wp-content/uploads/2016/04/default-placeholder-300x300.png";

@@ -10,6 +10,7 @@ import Alert from "./Components/Alert";
 import Stores from "./Components/Stores";
 import Card from "./Components/Card";
 import Storeprofile from "./Components/Storeprofile";
+import ProductProfile from "./Components/ProductProfile";
 
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/sign" element={<Signup />}></Route>
             <Route exact path="/profile" element={<Profile />}></Route>
+            <Route
+              exact
+              path="/productprofile"
+              element={<ProductProfile />}
+            ></Route>
           </Routes>
         </ContextState>
       </BrowserRouter>
