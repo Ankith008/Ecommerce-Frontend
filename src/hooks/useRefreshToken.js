@@ -15,6 +15,7 @@ const useRefreshToken = () => {
         { withCredentials: true }
       );
       dispatch(settingAuth(response.data.accessToken));
+      localStorage.setItem("authorized", true);
       return response.data.accessToken;
     };
     return refresh;
@@ -22,6 +23,7 @@ const useRefreshToken = () => {
     setalertdesc("Please Try Login Again");
     setalerthead("Error");
     setshowalert(true);
+    localStorage.setItem("authorized", false);
   }
 };
 export default useRefreshToken;

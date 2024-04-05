@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 import axios from "../api/axios";
 import { settingAuth } from "../actions/index";
-import useRefreshToken from "../hooks/useRefreshToken";
 import { useDispatch } from "react-redux";
 import cross from "../images/remove.png";
 
@@ -24,22 +23,27 @@ export default function Home() {
   disableReactDevTools();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post(
-          "/auth/refresh",
-          {},
-          { withCredentials: true }
-        );
+    if (localStorage.getItem("authorized") === "true") {
+      const fetchData = async () => {
+        try {
+          const response = await axios.post(
+            "/auth/refresh",
+            {},
+            { withCredentials: true }
+          );
 
-        dispatch(settingAuth(response.data.accessToken));
-      } catch (error) {
-        setalerthead("Error");
-        setalertdesc("Please Try Login Again");
-        setshowalert(true);
-      }
-    };
-    fetchData();
+          dispatch(settingAuth(response.data.accessToken));
+          localStorage.setItem("authorized", true);
+        } catch (error) {
+          setalerthead("Error");
+          setalertdesc("Please Get Authenticated Again");
+          setshowalert(true);
+          localStorage.setItem("authorized", false);
+        }
+      };
+
+      fetchData();
+    }
   }, []);
 
   return (
@@ -135,8 +139,6 @@ export default function Home() {
           </div>
         </section>
         <section className="followed"></section>
-        {/* <button onClick={() => refresh()}>refresh</button> */}
-        {/* <button onClick={findorders}>find</button> */}
       </main>
     </div>
   );

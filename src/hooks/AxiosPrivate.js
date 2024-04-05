@@ -29,11 +29,13 @@ const UseAxiosPrivate = (auth) => {
             const newAccessToken = await refresh();
             if (mystate) {
               dispatch(settingAuth(newAccessToken));
+              localStorage.setItem("authorized", true);
               prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
               return axiosPrivate(prevRequest);
             }
           } catch (error) {
             console.error("Error refreshing token:", error);
+            localStorage.setItem("authorized", false);
             return Promise.reject(error);
           }
         }
