@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CreateContext from "../Context/CreateContext";
 import { useDispatch, useSelector } from "react-redux";
 import { settingAuth } from "../actions";
+import defaul from "../images/default.jpg";
 
 export default function Signup() {
   const hloo = useRef();
@@ -421,9 +422,6 @@ export default function Signup() {
     }
   }, [localsigup, window.innerWidth]);
 
-  const defaultimage =
-    "https://www.pacifictrellisfruit.com/wp-content/uploads/2016/04/default-placeholder-300x300.png";
-
   return (
     <div className="outer">
       <p className="lsf">
@@ -443,11 +441,7 @@ export default function Signup() {
         >
           <h2>User Signup</h2>
           <div className="box">
-            <img
-              src="https://www.pacifictrellisfruit.com/wp-content/uploads/2016/04/default-placeholder-300x300.png"
-              className="imagespreview"
-              alt="profile"
-            />
+            <img src={defaul} className="imagespreview" alt="profile" />
             <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
           </div>
           <input hidden type="file" name="profile" id="inputprofile" />
@@ -529,11 +523,7 @@ export default function Signup() {
         >
           <h2>Company Signup</h2>
           <div className="box">
-            <img
-              src="https://www.pacifictrellisfruit.com/wp-content/uploads/2016/04/default-placeholder-300x300.png"
-              className="imagespreview"
-              alt="profile"
-            />
+            <img src={defaul} className="imagespreview" alt="profile" />
             <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
           </div>
           <input hidden type="file" name="profile" id="inputprofile" />
@@ -625,11 +615,7 @@ export default function Signup() {
         >
           <h2>Delivery Gay Signup</h2>
           <div className="box">
-            <img
-              src="https://www.pacifictrellisfruit.com/wp-content/uploads/2016/04/default-placeholder-300x300.png"
-              className="imagespreview"
-              alt="profile"
-            />
+            <img src={defaul} className="imagespreview" alt="profile" />
             <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
           </div>
           <input hidden type="file" name="profile" id="inputprofile" />
@@ -720,11 +706,7 @@ export default function Signup() {
         >
           <h2>Create Store</h2>
           <div className="box">
-            <img
-              src="https://www.pacifictrellisfruit.com/wp-content/uploads/2016/04/default-placeholder-300x300.png"
-              className="imagespreview"
-              alt="profile"
-            />
+            <img src={defaul} className="imagespreview" alt="profile" />
             <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
           </div>
           <input hidden type="file" name="profile" id="inputprofile" />
@@ -800,35 +782,35 @@ export default function Signup() {
           <div className="boxs">
             <div className="page1 page">
               <img
-                src={defaultimage}
+                src={defaul}
                 className="imagespreviews imagespreview1"
                 alt="profile"
               />
             </div>
             <div className="page2 page">
               <img
-                src={defaultimage}
+                src={defaul}
                 className="imagespreviews imagespreview2"
                 alt="profile"
               />
             </div>
             <div className="page3 page">
               <img
-                src={defaultimage}
+                src={defaul}
                 className="imagespreviews imagespreview3"
                 alt="profile"
               />
             </div>
             <div className="page4 page">
               <img
-                src={defaultimage}
+                src={defaul}
                 className="imagespreviews imagespreview4"
                 alt="profile"
               />
             </div>
             <div className="page5 page">
               <img
-                src={defaultimage}
+                src={defaul}
                 className="imagespreviews imagespreview5"
                 alt="profile"
               />
