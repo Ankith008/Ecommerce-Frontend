@@ -62,6 +62,18 @@ input {
 h2 {
   margin-bottom: 10px;
 }
+.password-input-container {
+  position: relative;
+}
+
+.eyes {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  width: 20px;
+  cursor: pointer;
+}
 
 .box {
   width: 100px;

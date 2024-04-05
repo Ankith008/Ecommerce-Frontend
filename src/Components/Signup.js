@@ -8,6 +8,8 @@ import CreateContext from "../Context/CreateContext";
 import { useDispatch, useSelector } from "react-redux";
 import { settingAuth } from "../actions";
 import defaul from "../images/default.jpg";
+import eye from "../images/eye.png";
+import hide from "../images/hide.png";
 
 export default function Signup() {
   const hloo = useRef();
@@ -60,19 +62,19 @@ export default function Signup() {
   }
 
   useEffect(() => {
-    if (!localsigup === "productcreate") {
-      const imagespreview = document.querySelector(".imagespreview");
-      const inputprofile = document.querySelector("#inputprofile");
-      inputprofile.addEventListener("change", function () {
-        const file = inputprofile.files[0];
-        if (file) {
-          setimage(file);
-          const reader = new FileReader();
-          reader.onload = (e) => (imagespreview.src = e.target.result);
-          reader.readAsDataURL(file);
-        }
-      });
-    }
+    // if (!localsigup === "productcreate") {
+    const imagespreview = document.querySelector(".imagespreview");
+    const inputprofile = document.querySelector("#inputprofile");
+    inputprofile.addEventListener("change", function () {
+      const file = inputprofile.files[0];
+      if (file) {
+        setimage(file);
+        const reader = new FileReader();
+        reader.onload = (e) => (imagespreview.src = e.target.result);
+        reader.readAsDataURL(file);
+      }
+    });
+    // }
   }, [localsigup]);
   const onchange = (e) => {
     setuserdata({ ...userdata, [e.target.name]: e.target.value });
@@ -98,6 +100,21 @@ export default function Signup() {
       fetchData();
     }
   }, []);
+
+  const [showpass, setshowpass] = useState(false);
+  const [pass, setpass] = useState("password");
+  const [passimg, setpassimg] = useState(eye);
+  const changeing = () => {
+    setshowpass(!showpass);
+    setpass(showpass ? "password" : "text");
+    setpassimg(showpass ? eye : hide);
+  };
+
+  const eyes = document.querySelector(".eyes");
+  const password = document.querySelector(".password");
+  if (eyes) {
+    eyes.addEventListener("click", changeing);
+  }
 
   const handleusersubmit = async (e) => {
     e.preventDefault();
@@ -469,14 +486,17 @@ export default function Signup() {
             required
             onChange={onchange}
           />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            required
-            id="password"
-            onChange={onchange}
-          />
+          <div className="password-input-container">
+            <input
+              type={pass}
+              placeholder="Password"
+              name="password"
+              required
+              id="password"
+              onChange={onchange}
+            />
+            <img src={passimg} alt="eyes" className="eyes" />
+          </div>
           <input
             type="text"
             placeholder="Address"
@@ -501,15 +521,17 @@ export default function Signup() {
             id="email"
             onChange={onchange}
           />
-
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            id="password"
-            required
-            onChange={onchange}
-          />
+          <div className="password-input-container">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+              required
+              onChange={onchange}
+            />
+            <img src={eye} alt="eyes" className="eyes" />
+          </div>
           <button className="submitbutton" type="submit">
             Login
           </button>
@@ -543,15 +565,17 @@ export default function Signup() {
             onChange={onchange}
             required
           />
-
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            id="password"
-            required
-            onChange={onchange}
-          />
+          <div className="password-input-container">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+              required
+              onChange={onchange}
+            />
+            <img src={eye} alt="eyes" className="eyes" />
+          </div>
           <input
             type="text"
             placeholder="Company Owner Number"
@@ -593,15 +617,17 @@ export default function Signup() {
             onChange={onchange}
             required
           />
-
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            required
-            id="password"
-            onChange={onchange}
-          />
+          <div className="password-input-container">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              required
+              id="password"
+              onChange={onchange}
+            />
+            <img src={eye} alt="eyes" className="eyes" />
+          </div>
           <button className="submitbutton" type="submit">
             Login
           </button>
@@ -643,14 +669,17 @@ export default function Signup() {
             onChange={onchange}
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            id="password"
-            onChange={onchange}
-            required
-          />
+          <div className="password-input-container">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+              onChange={onchange}
+              required
+            />
+            <img src={eye} alt="eyes" className="eyes" />
+          </div>
           <input
             type="text"
             placeholder="Areas for Delivery"
@@ -684,15 +713,17 @@ export default function Signup() {
             required
             onChange={onchange}
           />
-
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            id="password"
-            required
-            onChange={onchange}
-          />
+          <div className="password-input-container">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+              required
+              onChange={onchange}
+            />
+            <img src={eye} alt="eyes" className="eyes" />
+          </div>
           <button className="submitbutton" type="submit">
             Login
           </button>
