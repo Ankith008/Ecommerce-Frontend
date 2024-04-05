@@ -78,22 +78,24 @@ export default function Signup() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.post(
-          "/auth/refresh",
-          {},
-          { withCredentials: true }
-        );
+    if (localStorage.getItem("authorized") === "true") {
+      const fetchData = async () => {
+        try {
+          const response = await axios.post(
+            "/auth/refresh",
+            {},
+            { withCredentials: true }
+          );
 
-        dispatch(settingAuth(response.data.accessToken));
-      } catch (error) {
-        setalerthead("Error");
-        setalertdesc("Please Try Login Again");
-        setshowalert(true);
-      }
-    };
-    fetchData();
+          dispatch(settingAuth(response.data.accessToken));
+        } catch (error) {
+          setalerthead("Error");
+          setalertdesc("Please Try Login Again");
+          setshowalert(true);
+        }
+      };
+      fetchData();
+    }
   }, []);
 
   const handleusersubmit = async (e) => {
