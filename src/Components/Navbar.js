@@ -30,18 +30,20 @@ export default function Navbar() {
           withCredentials: true,
         }
       );
-      if (response.data.success) {
+      if (response.data.success === true) {
         dispatch(settingAuth(""));
-        // window.location.href = response.data.redirect;
+        window.location.href = response.data.redirect;
         setalertdesc("You have been logged out successfully");
         setalerthead("Success");
         setshowalert(true);
+        localStorage.setItem("authorized", false);
       }
     } catch (error) {
       setalerthead("Error");
       setalertdesc("Error logging out, Please Try Again");
       setshowalert(true);
       console.error("Error logging out:", error);
+      localStorage.setItem("authorized", true);
     }
   };
 

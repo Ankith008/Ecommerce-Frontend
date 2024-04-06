@@ -62,19 +62,21 @@ export default function Signup() {
   }
 
   useEffect(() => {
-    // if (!localsigup === "productcreate") {
-    const imagespreview = document.querySelector(".imagespreview");
-    const inputprofile = document.querySelector("#inputprofile");
-    inputprofile.addEventListener("change", function () {
-      const file = inputprofile.files[0];
-      if (file) {
-        setimage(file);
-        const reader = new FileReader();
-        reader.onload = (e) => (imagespreview.src = e.target.result);
-        reader.readAsDataURL(file);
+    if (localsigup !== "productcreate") {
+      const imagespreview = document.querySelector(".imagespreview");
+      const inputprofile = document.querySelector("#inputprofile");
+      if (imagespreview && inputprofile) {
+        inputprofile.addEventListener("change", function () {
+          const file = inputprofile.files[0];
+          if (file) {
+            setimage(file);
+            const reader = new FileReader();
+            reader.onload = (e) => (imagespreview.src = e.target.result);
+            reader.readAsDataURL(file);
+          }
+        });
       }
-    });
-    // }
+    }
   }, [localsigup]);
   const onchange = (e) => {
     setuserdata({ ...userdata, [e.target.name]: e.target.value });
@@ -91,10 +93,12 @@ export default function Signup() {
           );
 
           dispatch(settingAuth(response.data.accessToken));
+          localStorage.setItem("authorized", true);
         } catch (error) {
           setalerthead("Error");
           setalertdesc("Please Try Login Again");
           setshowalert(true);
+          localStorage.setItem("authorized", true);
         }
       };
       fetchData();
@@ -141,11 +145,13 @@ export default function Signup() {
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
         setloading(false);
+        localStorage.setItem("authorized", true);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert("true");
         setloading(false);
+        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
@@ -176,10 +182,12 @@ export default function Signup() {
         // navigate("/profile");
         dispatch(settingAuth(json.accessToken));
         setloading(false);
+        localStorage.setItem("authorized", true);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert(false);
+        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
@@ -204,10 +212,12 @@ export default function Signup() {
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
         setloading(false);
+        localStorage.setItem("authorized", true);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert(false);
+        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
@@ -238,10 +248,12 @@ export default function Signup() {
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
         setloading(false);
+        localStorage.setItem("authorized", true);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert(false);
+        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
@@ -274,10 +286,14 @@ export default function Signup() {
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
         setloading(false);
+        localStorage.setItem("authorized", true);
       }
       return;
     } catch (error) {
-      console.log(error);
+      setalertdesc("There is an error in Creating Delivery");
+      setalerthead("ERROR");
+      setshowalert("true");
+      localStorage.setItem("authorized", false);
     }
   };
   const handlecompanysignup = async (e) => {
@@ -305,14 +321,19 @@ export default function Signup() {
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
         setloading(false);
+        localStorage.setItem("authorized", true);
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert(false);
+        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
-      console.log(error);
+      setalertdesc("There is an error in Creating Company");
+      setalerthead("ERROR");
+      setshowalert("true");
+      localStorage.setItem("authorized", false);
     }
   };
 
@@ -356,14 +377,19 @@ export default function Signup() {
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
         setloading(false);
+        localStorage.setItem("authorized", true);
       } else {
         setalerthead("ERROR");
         setalertdesc("There is an error in Creating Store");
         setshowalert(true);
+        localStorage.setItem("authorized", false);
       }
     } catch (error) {
       setloading(false);
-      console.log(error);
+      setalerthead("ERROR");
+      setalertdesc("There is an error in Creating Store");
+      setshowalert(true);
+      localStorage.setItem("authorized", false);
     }
   };
 
@@ -523,14 +549,14 @@ export default function Signup() {
           />
           <div className="password-input-container">
             <input
-              type="password"
+              type={pass}
               placeholder="Password"
               name="password"
               id="password"
               required
               onChange={onchange}
             />
-            <img src={eye} alt="eyes" className="eyes" />
+            <img src={passimg} alt="eyes" className="eyes" />
           </div>
           <button className="submitbutton" type="submit">
             Login
@@ -567,14 +593,14 @@ export default function Signup() {
           />
           <div className="password-input-container">
             <input
-              type="password"
+              type={pass}
               placeholder="Password"
               name="password"
               id="password"
               required
               onChange={onchange}
             />
-            <img src={eye} alt="eyes" className="eyes" />
+            <img src={passimg} alt="eyes" className="eyes" />
           </div>
           <input
             type="text"
@@ -619,14 +645,14 @@ export default function Signup() {
           />
           <div className="password-input-container">
             <input
-              type="password"
+              type={pass}
               placeholder="Password"
               name="password"
               required
               id="password"
               onChange={onchange}
             />
-            <img src={eye} alt="eyes" className="eyes" />
+            <img src={passimg} alt="eyes" className="eyes" />
           </div>
           <button className="submitbutton" type="submit">
             Login
@@ -671,14 +697,14 @@ export default function Signup() {
           />
           <div className="password-input-container">
             <input
-              type="password"
+              type={pass}
               placeholder="Password"
               name="password"
               id="password"
               onChange={onchange}
               required
             />
-            <img src={eye} alt="eyes" className="eyes" />
+            <img src={passimg} alt="eyes" className="eyes" />
           </div>
           <input
             type="text"
@@ -715,14 +741,14 @@ export default function Signup() {
           />
           <div className="password-input-container">
             <input
-              type="password"
+              type={pass}
               placeholder="Password"
               name="password"
               id="password"
               required
               onChange={onchange}
             />
-            <img src={eye} alt="eyes" className="eyes" />
+            <img src={passimg} alt="eyes" className="eyes" />
           </div>
           <button className="submitbutton" type="submit">
             Login
