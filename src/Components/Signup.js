@@ -6,7 +6,7 @@ import axios, { axiosPrivate } from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import CreateContext from "../Context/CreateContext";
 import { useDispatch, useSelector } from "react-redux";
-import { settingAuth } from "../actions";
+import { settingAuth, noofproduct } from "../actions";
 import defaul from "../images/default.jpg";
 import eye from "../images/eye.png";
 import hide from "../images/hide.png";
@@ -138,7 +138,7 @@ export default function Signup() {
         withCredentials: true,
       });
       const json = await response.data;
-      if (json.success) {
+      if (json.success === "true") {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
         setshowalert("true");
@@ -151,7 +151,6 @@ export default function Signup() {
         setalertdesc("Invalid Email or Password");
         setshowalert("true");
         setloading(false);
-        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
@@ -175,7 +174,7 @@ export default function Signup() {
         }
       );
       const json = await response.data;
-      if (json.success) {
+      if (json.success === "true") {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Logged In");
         setshowalert(false);
@@ -187,7 +186,6 @@ export default function Signup() {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert(false);
-        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
@@ -205,7 +203,7 @@ export default function Signup() {
         { withCredentials: true }
       );
       const json = await response.data;
-      if (json.success) {
+      if (json.success === "true") {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Logged In");
         setshowalert("true");
@@ -217,7 +215,6 @@ export default function Signup() {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert(false);
-        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
@@ -241,7 +238,7 @@ export default function Signup() {
       );
 
       const json = await response.data;
-      if (json.success) {
+      if (json.success === "true") {
         setalerthead("SUCCESS");
         setalertdesc("You have successfully logged in");
         setshowalert("true");
@@ -253,7 +250,6 @@ export default function Signup() {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert(false);
-        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
@@ -279,7 +275,7 @@ export default function Signup() {
         withCredentials: true,
       });
       const json = await response.data;
-      if (json.success) {
+      if (json.success === "true") {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
         setshowalert("true");
@@ -293,7 +289,6 @@ export default function Signup() {
       setalertdesc("There is an error in Creating Delivery");
       setalerthead("ERROR");
       setshowalert("true");
-      localStorage.setItem("authorized", false);
     }
   };
   const handlecompanysignup = async (e) => {
@@ -314,7 +309,7 @@ export default function Signup() {
         withCredentials: true,
       });
       const json = await response.data;
-      if (json.success) {
+      if (json.success === "true") {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
         setshowalert("true");
@@ -326,14 +321,13 @@ export default function Signup() {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert(false);
-        localStorage.setItem("authorized", false);
       }
       return;
     } catch (error) {
       setalertdesc("There is an error in Creating Company");
       setalerthead("ERROR");
       setshowalert("true");
-      localStorage.setItem("authorized", false);
+      setloading(false);
     }
   };
 
@@ -370,7 +364,7 @@ export default function Signup() {
         }
       );
       const json = await response.data;
-      if (json.success) {
+      if (json.success === "true") {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Created Store");
         setshowalert(true);
@@ -444,10 +438,11 @@ export default function Signup() {
       );
       const json = await response.data;
       setloading(false);
-      if (json.success) {
+      if (json.success === "true") {
         setalerthead("SUCCESS");
         setalertdesc("Your Product Has Been Created Successfully");
         setshowalert("true");
+        // dispatch(noofproduct(json.noofproduct));
         navigate("/storeprofile");
       }
     } catch (error) {

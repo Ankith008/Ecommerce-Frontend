@@ -1,4 +1,4 @@
-.cardouter {
+/* .cardouter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,12 +31,12 @@
 .image {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: cover; 
 }
 .cardright {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
   width: 50%;
   height: 100%;
-}
+} */

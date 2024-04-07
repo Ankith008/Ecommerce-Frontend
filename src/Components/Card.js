@@ -75,7 +75,7 @@ export default function Card(props) {
           </div>
           <div className="email detail">
             <p className="head">Email:</p>
-            <p className="dec">{props.email.substring(0, 12) + "..."}</p>
+            <p className="dec">{props.email.substring(0, 23) + "..."}</p>
           </div>
         </div>
       </div>

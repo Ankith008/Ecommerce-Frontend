@@ -76,7 +76,7 @@ export default function Profile() {
   return (
     <div className="profileouter">
       <section className="desc">
-        <div className="left">
+        <div className="left ">
           <img
             src={
               !mystate.profile
@@ -105,10 +105,11 @@ export default function Profile() {
               <span>Company Contact :</span>
               {mystate.companyownernumber}
             </p>
-            <p>
+            <p className="company-location" title={mystate.companylocation}>
               <span>Company Location :</span>
-              {mystate.companylocation}
+              {mystate?.companylocation?.slice(0, 16) + "..."}
             </p>
+            <div class="location-tooltip">{mystate.companylocation}</div>
           </div>
         </div>
       </section>

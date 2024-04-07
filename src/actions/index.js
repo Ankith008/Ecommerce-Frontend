@@ -24,3 +24,10 @@ export const settingstoredetail = (data) => {
     payload: data,
   };
 };
+
+export const noofproduct = (data) => {
+  return {
+    type: "NO_OF_PRODUCT",
+    payload: data,
+  };
+};

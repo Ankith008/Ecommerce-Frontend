@@ -1,9 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import CreateContext from "../Context/CreateContext";
+import { settingstoredetail } from "../actions/index";
 
 export default function Storeprofile() {
+  const { setshownav } = useContext(CreateContext);
+  const dispatch = useDispatch();
+  let stores = localStorage.getItem("stores");
+  stores = JSON.parse(stores);
   const mystate = useSelector((state) => state.settingstoredetail);
+
+  useEffect(() => {
+    if (stores) {
+      dispatch(settingstoredetail(stores));
+    }
+    setshownav(true);
+  }, []);
+
   const navigate = useNavigate();
   return (
     <div className="profileouter">
@@ -11,8 +25,8 @@ export default function Storeprofile() {
         <div className="left">
           <img
             src={
-              mystate.profile
-                ? mystate.profile
+              mystate[0]
+                ? mystate[0].profile
                 : "https://www.w3schools.com/howto/img_avatar.png"
             }
             alt="Avatar"
@@ -22,23 +36,23 @@ export default function Storeprofile() {
         <div className="right">
           <div className="companydetails">
             <p>
-              <span>Store Name:</span> {mystate.storename}
+              <span>Store Name:</span> {mystate[0] && mystate[0].storename}
             </p>
             <p>
-              <span>store Owner:</span>
-              {mystate.storeIncharegename}
+              <span>Store Owner:</span>
+              {mystate[0] && mystate[0].storeIncharegename}
             </p>
             <p>
               <span>Store Email:</span>
-              {mystate.storeemail}
+              {mystate[0] && mystate[0].storeemail}
             </p>
             <p>
               <span>Store Location:</span>
-              {mystate.storeAddress}
+              {mystate[0] && mystate[0].storeAddress}
             </p>
             <p>
               <span>Store Contact:</span>
-              {mystate.storeIncharegenumber}
+              {mystate[0] && mystate[0].storeIncharegenumber}
             </p>
           </div>
         </div>
