@@ -11,6 +11,8 @@ import Stores from "./Components/Stores";
 import Card from "./Components/Card";
 import Storeprofile from "./Components/Storeprofile";
 import ProductProfile from "./Components/ProductProfile";
+import Notfound from "./Components/Notfound";
+import Product from "./Components/Product";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
               path="/productprofile"
               element={<ProductProfile />}
             ></Route>
+            <Route exact path="/product" element={<Product />}></Route>
+            <Route path="*" element={<Notfound />}></Route>
           </Routes>
         </ContextState>
       </BrowserRouter>

@@ -147,6 +147,11 @@ p {
   .page3 {
     flex-direction: column;
   }
+
+  .desc {
+    padding-top: 40px;
+  }
+
   .page2,
   .page4 {
     flex-direction: column-reverse;

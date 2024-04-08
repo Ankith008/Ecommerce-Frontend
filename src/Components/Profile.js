@@ -75,6 +75,7 @@ export default function Profile() {
 
   return (
     <div className="profileouter">
+      <h2>Company</h2>
       <section className="desc">
         <div className="left ">
           <img
@@ -146,6 +147,7 @@ export default function Profile() {
             onClick={() => {
               findstores();
               // navigate("/store");
+              localStorage.setItem("type", "store");
             }}
           >
             Watch Store

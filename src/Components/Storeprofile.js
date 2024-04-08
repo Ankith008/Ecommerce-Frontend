@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CreateContext from "../Context/CreateContext";
 import { settingstoredetail } from "../actions/index";
+import "../css/StoreProfile.css";
 
 export default function Storeprofile() {
   const { setshownav } = useContext(CreateContext);
@@ -21,12 +22,13 @@ export default function Storeprofile() {
   const navigate = useNavigate();
   return (
     <div className="profileouter">
+      <h2>Store</h2>
       <section className="desc">
         <div className="left">
           <img
             src={
-              mystate[0]
-                ? mystate[0].profile
+              mystate
+                ? mystate.profile
                 : "https://www.w3schools.com/howto/img_avatar.png"
             }
             alt="Avatar"
@@ -36,23 +38,23 @@ export default function Storeprofile() {
         <div className="right">
           <div className="companydetails">
             <p>
-              <span>Store Name:</span> {mystate[0] && mystate[0].storename}
+              <span>Store Name:</span> {mystate && mystate.storename}
             </p>
             <p>
               <span>Store Owner:</span>
-              {mystate[0] && mystate[0].storeIncharegename}
+              {mystate && mystate.storeIncharegename}
             </p>
             <p>
               <span>Store Email:</span>
-              {mystate[0] && mystate[0].storeemail}
+              {mystate && mystate.storeemail}
             </p>
             <p>
               <span>Store Location:</span>
-              {mystate[0] && mystate[0].storeAddress}
+              {mystate && mystate.storeAddress}
             </p>
             <p>
               <span>Store Contact:</span>
-              {mystate[0] && mystate[0].storeIncharegenumber}
+              {mystate && mystate.storeIncharegenumber}
             </p>
           </div>
         </div>
@@ -88,8 +90,8 @@ export default function Storeprofile() {
           <p
             className="create"
             onClick={() => {
-              // findstores();
-              // navigate("/store");
+              navigate("/product");
+              localStorage.setItem("type", "product");
             }}
           >
             Watch Products

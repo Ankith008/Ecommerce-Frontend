@@ -2,6 +2,9 @@
 * {
   font-family: "Jost", sans-serif;
 }
+.desc {
+  padding-top: 20px;
+}
 
 .outer {
   width: 100vw;
@@ -59,8 +62,10 @@ input {
 .Link p {
   color: white;
 }
-h2 {
+h3 {
   margin-bottom: 10px;
+  font-size: 1.5rem;
+  text-decoration: underline;
 }
 .password-input-container {
   position: relative;

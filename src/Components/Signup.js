@@ -238,7 +238,7 @@ export default function Signup() {
       );
 
       const json = await response.data;
-      if (json.success === "true") {
+      if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have successfully logged in");
         setshowalert("true");
@@ -249,7 +249,8 @@ export default function Signup() {
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
-        setshowalert(false);
+        setshowalert("true");
+        setloading(false);
       }
       return;
     } catch (error) {
@@ -467,9 +468,14 @@ export default function Signup() {
         Kutta
       </p>
       <div className="Link">
-        <Link to="/" onClick={() => setshownav(true)}>
+        <p
+          onClick={() => {
+            setshownav(true);
+            navigate(-1);
+          }}
+        >
           <p>Back</p>
-        </Link>
+        </p>
       </div>
       {localsigup === "User_signup" && (
         <form
@@ -477,7 +483,7 @@ export default function Signup() {
           onSubmit={handleusersubmit}
           encType="multipart/form-data"
         >
-          <h2>User Signup</h2>
+          <h3>User Signup</h3>
           <div className="box">
             <img src={defaul} className="imagespreview" alt="profile" />
             <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
@@ -533,7 +539,7 @@ export default function Signup() {
       )}
       {localsigup === "User_Login" && (
         <form className="UserSignup" onSubmit={handleuserlogin}>
-          <h2>User Login</h2>
+          <h3>User Login</h3>
           <input
             type="email"
             placeholder="Email"
@@ -564,7 +570,7 @@ export default function Signup() {
           onSubmit={handlecompanysignup}
           encType="multipart/form-data"
         >
-          <h2>Company Signup</h2>
+          <h3>Company Signup</h3>
           <div className="box">
             <img src={defaul} className="imagespreview" alt="profile" />
             <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
@@ -628,7 +634,7 @@ export default function Signup() {
       )}
       {localsigup === "Company_Login" && (
         <form className="UserSignup" onSubmit={handlecompanylogin}>
-          <h2>Company Login</h2>
+          <h3>Company Login</h3>
 
           <input
             type="email"
@@ -660,7 +666,7 @@ export default function Signup() {
           onSubmit={handleDeliverysign}
           encType="multipart/form-data"
         >
-          <h2>Delivery Gay Signup</h2>
+          <h3>Delivery Gay Signup</h3>
           <div className="box">
             <img src={defaul} className="imagespreview" alt="profile" />
             <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
@@ -724,7 +730,7 @@ export default function Signup() {
       )}
       {localsigup === "Delivery_Login" && (
         <form className="UserSignup" onSubmit={handleDeliverylogin}>
-          <h2>Delivery Gay Login</h2>
+          <h3>Delivery Gay Login</h3>
 
           <input
             type="email"
@@ -756,7 +762,7 @@ export default function Signup() {
           onSubmit={handletext}
           encType="multipart/form-data"
         >
-          <h2>Create Store</h2>
+          <h3>Create Store</h3>
           <div className="box">
             <img src={defaul} className="imagespreview" alt="profile" />
             <i id="hloo" ref={hloo} className="fa-solid fa-pen"></i>
@@ -830,7 +836,7 @@ export default function Signup() {
           onSubmit={handleproductsubmit}
           encType="multipart/form-data"
         >
-          <h2>Create Product</h2>
+          <h3>Create Product</h3>
           <div className="boxs">
             <div className="page1 page">
               <img
