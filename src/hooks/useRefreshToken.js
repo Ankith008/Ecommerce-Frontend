@@ -20,7 +20,7 @@ const useRefreshToken = () => {
     };
     return refresh;
   } catch (error) {
-    setalertdesc("Please Try Login Again");
+    setalertdesc("Please Try Login ");
     setalerthead("Error");
     setshowalert(true);
     localStorage.setItem("authorized", false);

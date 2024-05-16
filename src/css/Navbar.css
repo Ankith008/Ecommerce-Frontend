@@ -22,6 +22,7 @@
   font-size: 2rem;
   font-weight: 600;
   font-style: italic;
+  cursor: pointer;
 }
 
 li {
@@ -50,6 +51,7 @@ li:hover::after {
   top: 20px;
   display: none;
   z-index: 5;
+  cursor: pointer;
 }
 
 .smaller {

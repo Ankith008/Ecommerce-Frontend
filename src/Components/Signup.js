@@ -96,7 +96,7 @@ export default function Signup() {
           localStorage.setItem("authorized", true);
         } catch (error) {
           setalerthead("Error");
-          setalertdesc("Please Try Login Again");
+          setalertdesc("Please Try Login");
           setshowalert(true);
           localStorage.setItem("authorized", true);
         }
@@ -138,22 +138,23 @@ export default function Signup() {
         withCredentials: true,
       });
       const json = await response.data;
-      if (json.success === "true") {
+      setloading(false);
+      if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
-        setshowalert("true");
-        navigate("/profile");
+        setshowalert(true);
+        navigate("/user");
         dispatch(settingAuth(json.accessToken));
-        setloading(false);
+        localStorage.setItem("currentsignup", "User_signup");
         localStorage.setItem("authorized", true);
       } else {
         setalerthead("ERROR");
-        setalertdesc("Invalid Email or Password");
-        setshowalert("true");
-        setloading(false);
+        setalertdesc(json.error);
+        setshowalert(true);
       }
       return;
     } catch (error) {
+      setloading(false);
       console.log(error);
     }
   };
@@ -174,22 +175,25 @@ export default function Signup() {
         }
       );
       const json = await response.data;
-      if (json.success === "true") {
+      setloading(false);
+      if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Logged In");
-        setshowalert(false);
-        // navigate("/profile");
+        setshowalert(true);
+        navigate("/user");
         dispatch(settingAuth(json.accessToken));
-        setloading(false);
         localStorage.setItem("authorized", true);
+        localStorage.setItem("currentsignup", "User_Login");
       } else {
         setalerthead("ERROR");
-        setalertdesc("Invalid Email or Password");
-        setshowalert(false);
+        setalertdesc(json.error);
+        setshowalert(true);
       }
-      return;
     } catch (error) {
-      console.log(error);
+      setloading(false);
+      setalerthead("ERROR");
+      setalertdesc("Invalid Email or Password");
+      setshowalert(true);
     }
   };
   const handleDeliverylogin = async (e) => {
@@ -203,21 +207,24 @@ export default function Signup() {
         { withCredentials: true }
       );
       const json = await response.data;
-      if (json.success === "true") {
+      setloading(false);
+      if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Logged In");
         setshowalert("true");
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
-        setloading(false);
+
         localStorage.setItem("authorized", true);
+        localStorage.setItem("currentsignup", "Delivery_Login");
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
-        setshowalert(false);
+        setshowalert("true");
       }
       return;
     } catch (error) {
+      setloading(false);
       console.log(error);
     }
   };
@@ -238,22 +245,24 @@ export default function Signup() {
       );
 
       const json = await response.data;
+      setloading(false);
       if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have successfully logged in");
         setshowalert("true");
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
-        setloading(false);
+
         localStorage.setItem("authorized", true);
+        localStorage.setItem("currentsignup", "Company_Login");
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
         setshowalert("true");
-        setloading(false);
       }
       return;
     } catch (error) {
+      setloading(false);
       console.log(error);
     }
   };
@@ -276,17 +285,19 @@ export default function Signup() {
         withCredentials: true,
       });
       const json = await response.data;
-      if (json.success === "true") {
+      setloading(false);
+      if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
         setshowalert("true");
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
-        setloading(false);
         localStorage.setItem("authorized", true);
+        localStorage.setItem("currentsignup", "Delivery_Signup");
       }
       return;
     } catch (error) {
+      setloading(false);
       setalertdesc("There is an error in Creating Delivery");
       setalerthead("ERROR");
       setshowalert("true");
@@ -310,18 +321,20 @@ export default function Signup() {
         withCredentials: true,
       });
       const json = await response.data;
-      if (json.success === "true") {
+      setloading(false);
+      if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Signed Up");
         setshowalert("true");
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
-        setloading(false);
+
         localStorage.setItem("authorized", true);
+        localStorage.setItem("currentsignup", "Company_Signup");
       } else {
         setalerthead("ERROR");
         setalertdesc("Invalid Email or Password");
-        setshowalert(false);
+        setshowalert("true");
       }
       return;
     } catch (error) {
@@ -365,18 +378,19 @@ export default function Signup() {
         }
       );
       const json = await response.data;
-      if (json.success === "true") {
+      setloading(false);
+      if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("You have Successfully Created Store");
-        setshowalert(true);
+        setshowalert("true");
         navigate("/profile");
         dispatch(settingAuth(json.accessToken));
-        setloading(false);
+
         localStorage.setItem("authorized", true);
       } else {
         setalerthead("ERROR");
         setalertdesc("There is an error in Creating Store");
-        setshowalert(true);
+        setshowalert("true");
         localStorage.setItem("authorized", false);
       }
     } catch (error) {
@@ -439,7 +453,7 @@ export default function Signup() {
       );
       const json = await response.data;
       setloading(false);
-      if (json.success === "true") {
+      if (json.success) {
         setalerthead("SUCCESS");
         setalertdesc("Your Product Has Been Created Successfully");
         setshowalert("true");
@@ -532,7 +546,7 @@ export default function Signup() {
             id="Address"
             onChange={onchange}
           />
-          <button className="submitbutton" type="submit">
+          <button className="btn btn-anim submitbutton" type="submit">
             Signup
           </button>
         </form>
@@ -559,7 +573,7 @@ export default function Signup() {
             />
             <img src={passimg} alt="eyes" className="eyes" />
           </div>
-          <button className="submitbutton" type="submit">
+          <button className="btn btn-anim submitbutton" type="submit">
             Login
           </button>
         </form>
@@ -627,7 +641,7 @@ export default function Signup() {
             onChange={onchange}
             required
           />
-          <button className="submitbutton" type="submit">
+          <button className="btn btn-anim submitbutton" type="submit">
             Signup
           </button>
         </form>
@@ -655,7 +669,7 @@ export default function Signup() {
             />
             <img src={passimg} alt="eyes" className="eyes" />
           </div>
-          <button className="submitbutton" type="submit">
+          <button className="btn btn-anim submitbutton" type="submit">
             Login
           </button>
         </form>
@@ -723,7 +737,7 @@ export default function Signup() {
             required
             onChange={onchange}
           />
-          <button className="submitbutton" type="submit">
+          <button className="btn btn-anim submitbutton" type="submit">
             Signup
           </button>
         </form>
@@ -751,7 +765,7 @@ export default function Signup() {
             />
             <img src={passimg} alt="eyes" className="eyes" />
           </div>
-          <button className="submitbutton" type="submit">
+          <button className="btn btn-anim submitbutton" type="submit">
             Login
           </button>
         </form>
@@ -825,8 +839,8 @@ export default function Signup() {
             onChange={onchange}
           />
 
-          <button className="submitbutton" type="submit">
-            Signup
+          <button className="btn btn-anim submitbutton" type="submit">
+            Create
           </button>
         </form>
       )}
@@ -925,7 +939,7 @@ export default function Signup() {
             placeholder="Describe about your Product"
           ></textarea>
 
-          <button className="submitbutton" type="submit">
+          <button className="btn btn-anim submitbutton" type="submit">
             Create Product
           </button>
         </form>

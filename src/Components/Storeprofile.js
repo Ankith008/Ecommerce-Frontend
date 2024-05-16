@@ -122,6 +122,24 @@ export default function Storeprofile() {
           </p>
         </div>
       </section>
+      <section className="page3">
+        <div className="left2">
+          <p
+            className="create"
+            onClick={() => {
+              navigate("/order");
+            }}
+          >
+            Orders
+          </p>
+        </div>
+        <div className="right2">
+          <p className="createdes">
+            Click on the Orders Button to see all your Stores Orders and manage
+            them.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

@@ -13,25 +13,41 @@ export default function Stores() {
       <div className="contentbox">
         {product?.length < mystate?.length
           ? mystate?.length > 0 &&
-            mystate?.map((product) => (
-              <Card
-                key={product._id}
-                image={product.profile[0]}
-                name={product.Productname}
-                category={product.ProductCategorie}
-                price={product.Productprice}
-              />
-            ))
+            mystate?.map((product) => {
+              let sizes = [];
+              product.Productsize.map((size) => {
+                sizes.push(size);
+              });
+              return (
+                <Card
+                  key={product._id}
+                  unique={product._id}
+                  image={product.profile[0]}
+                  name={product.Productname}
+                  category={product.ProductCategorie}
+                  price={product.Productprice}
+                  size={sizes.join(", ")}
+                />
+              );
+            })
           : product?.length > 0 &&
-            product?.map((product) => (
-              <Card
-                key={product._id}
-                image={product.profile[0]}
-                name={product.Productname}
-                category={product.ProductCategorie}
-                price={product.Productprice}
-              />
-            ))}
+            product?.map((product) => {
+              let sizes = [];
+              product.Productsize.map((size) => {
+                sizes.push(size);
+              });
+              return (
+                <Card
+                  key={product._id}
+                  unique={product._id}
+                  image={product.profile[0]}
+                  name={product.Productname}
+                  category={product.ProductCategorie}
+                  price={product.Productprice}
+                  size={sizes.join(", ")}
+                />
+              );
+            })}
       </div>
     </div>
   );

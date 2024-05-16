@@ -133,9 +133,9 @@ export default function Home() {
               secure transactions. Join our community of trendsetters today and
               step into a world of endless fashion possibilities.
             </p>
-            <a href="/" className="shopnow">
+            <p className="shopnow" onClick={() => navigate("/shop")}>
               Shop Now →
-            </a>
+            </p>
           </div>
         </section>
         <section className="followed"></section>

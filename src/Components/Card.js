@@ -12,17 +12,29 @@ export default function Card(props) {
   const localstoreid = localStorage.getItem("storeid");
   const { setloading } = useContext(CreateContext);
   const navigate = useNavigate();
-  const localtype = JSON.stringify(localStorage.getItem("type"));
+  const localtype = localStorage.getItem("type");
+
+  let cat = "";
+  if (props.category) {
+    let categorie = props.category.join(",");
+    if (categorie.length >= 5) {
+      cat = categorie.substring(0, 15) + "...";
+    } else {
+      cat = categorie;
+    }
+  }
 
   const fetchData = async () => {
     setloading(true);
-    const response = await axios.get(
-      `/find/store/${!localstoreid ? mystate : localstoreid}`
-    );
-    if (response.data) {
-      dispatch(settingstoredetail(response.data.store));
-      localStorage.setItem("stores", JSON.stringify(response.data.store));
-      navigate("/storeprofile");
+    if (localtype === "store") {
+      const response = await axios.get(
+        `/find/store/${!localstoreid ? mystate : localstoreid}`
+      );
+      if (response.data) {
+        dispatch(settingstoredetail(response.data.store));
+        localStorage.setItem("stores", JSON.stringify(response.data.store));
+        navigate("/storeprofile");
+      }
     }
     setloading(false);
   };
@@ -36,6 +48,14 @@ export default function Card(props) {
       dispatch(settingstoreid(props.unique));
       localStorage.setItem("storeid", props.unique);
       fetchData();
+    }
+  };
+
+  const handleproduct = async () => {
+    const element = cardRef.current;
+    if (element) {
+      localStorage.setItem("productid", props.unique);
+      navigate("/productprofile");
     }
   };
 
@@ -80,13 +100,51 @@ export default function Card(props) {
               </div>
               <div className="email detail">
                 <p className="head">Email:</p>
-                <p className="dec">{props.email.substring(0, 23) + "..."}</p>
+                <p className="dec">{props.email?.slice(0, 23) + "..."}</p>
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <h1>sdfsdfs</h1>
+        <div
+          className="cardouter"
+          ref={cardRef}
+          onClick={async () => {
+            await handleproduct();
+          }}
+        >
+          <div className="image">
+            <img
+              className="image1"
+              src={
+                props.image
+                  ? props.image
+                  : "https://www.w3schools.com/howto/img_avatar.png"
+              }
+              alt="Profile"
+            />
+          </div>
+          <div className="content">
+            <div className="companycontent">
+              <div className="name detail">
+                <p className="head">Name:</p>
+                <p className="dec">{props.name}</p>
+              </div>
+              <div className="prize detail">
+                <p className="head">Branch:</p>
+                <p className="dec">{props.price}</p>
+              </div>
+              <div className="size detail">
+                <p className="head">Size:</p>
+                <p className="dec">{props.size}</p>
+              </div>
+              <div className="email detail">
+                <p className="head">Category:</p>
+                <p className="dec">{cat}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

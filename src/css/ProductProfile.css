@@ -1,42 +1,280 @@
-/* .cardouter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh !important;
-  flex-direction: row;
-}
-.cardleft {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  height: 100%;
-  overflow-x: hidden;
-}
-.productimage {
+.productpre {
   width: 100%;
-  height: 100%;
-  display: flex;
-  scroll-snap-type: x mandatory;
-}
-.images {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  margin-top: 20px;
+  flex-direction: column;
+}
+.proouter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.prodet {
+  font-size: 2vw;
+  font-style: italic;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  text-decoration: underline;
+  overflow: hidden;
+}
+.proleft {
+  width: 50%;
+  padding-bottom: 50px;
+}
+.proright {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.pn {
+  font-size: 1.5vw;
+}
+.proname,
+.prosizes,
+.price,
+.que {
+  font-size: 1.5vw;
+
+  display: flex;
+  align-items: center;
+}
+.proleft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.proquenty {
+  display: flex;
+  align-items: center;
+}
+.quenty {
+  width: 40px;
+  margin-left: 20px;
+  padding-left: 12px;
+}
+input::placeholder {
+  color: black;
+}
+
+.descp {
+  height: 150px;
+  font-size: 1.2vw;
+  width: 80%;
+  margin: auto;
+}
+.proimage {
+  width: 60%;
+
+  display: flex;
+  overflow: scroll;
+  scroll-snap-type: x mandatory;
+  padding: 20px;
+  border-radius: 10px;
+  scrollbar-width: none;
+  box-shadow: 2px 5px 2px rgba(0, 0, 0, 0.5),
+    -2px -2px 5px 2px rgba(0, 0, 0, 0.5);
+  gap: 10px;
+  margin-top: 10px;
+  max-height: 70vh;
+}
+.proimage > .image {
   min-width: 100%;
+  height: auto;
   scroll-snap-align: center;
 }
-.image {
-  height: 100%;
-  width: 100%;
-  object-fit: cover; 
-}
-.cardright {
+
+.prosize {
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
   justify-content: center;
-  align-items: center; 
-  width: 50%;
-  height: 100%;
-} */
+}
+
+.descphead {
+  font-size: 1.7vw;
+  margin-bottom: 20px;
+}
+
+.prosize > .content {
+  display: flex;
+  box-shadow: 2px 5px 2px rgba(0, 0, 0, 0.5),
+    -2px -2px 5px 2px rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.prosize > .content p {
+  font-size: 1.2rem;
+}
+.probuttons {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  margin: 20px auto;
+  justify-content: space-around;
+}
+
+.addtocart,
+.buynow {
+  border: transparent;
+  background-color: black;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  padding: 15px 30px;
+  cursor: pointer;
+}
+.probuttons {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  margin: 20px auto;
+}
+
+:root {
+  --btn-border: 1px solid rgba(255, 255, 255, 0.2);
+  --btn-bg: black;
+  --btn-shadow: 1px 1px 25px 10px rgba(255, 255, 255, 0.5);
+  --btn-text-color: #f4f4f4;
+
+  --shine-degree: 120deg;
+  --shine-color: rgba(255, 255, 255, 0.2);
+  --shine-effect: linear-gradient(
+    var(--shine-degree),
+    transparent,
+    var(--shine-color),
+    transparent
+  );
+  --shine-transition: all #{$anim-speed}s ease-in-out;
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  border: var(--btn-border);
+  color: var(--btn-text-color);
+  background: var(--btn-bg);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--shine-effect);
+  }
+}
+
+.btn-anim {
+  &::before {
+    animation: shine 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+    transition-property: left;
+  }
+  50%,
+  100% {
+    left: 100%;
+    transition-property: left;
+  }
+}
+
+@media (max-width: 1115px) {
+  .prosize > .content {
+    width: 4vw;
+    height: 5vw;
+  }
+  .prosize > .content p {
+    font-size: 1.5vw;
+  }
+}
+@media (max-width: 809px) {
+  .proouter {
+    flex-direction: column;
+  }
+  .proleft {
+    width: 100%;
+  }
+  .proright {
+    width: 90%;
+  }
+  .proimage {
+    width: 350px;
+  }
+  .prosize {
+    width: 100%;
+  }
+  .probuttons {
+    width: 100%;
+  }
+  .prodet {
+    font-size: 30px;
+  }
+  .pn {
+    font-size: 20px;
+  }
+  .proquenty {
+    font-size: 20px;
+  }
+  .descp {
+    font-size: 15px;
+  }
+  .descphead,
+  .que,
+  .price,
+  .prosizes,
+  .proname {
+    font-size: 20px;
+  }
+
+  .prosize > .content {
+    width: 35px;
+    height: 45px;
+  }
+  .prosize > .content p {
+    font-size: 15px;
+  }
+  .probuttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .addtocart,
+  .buynow {
+    font-size: 1.2rem;
+    width: 250px;
+    margin: auto;
+    padding: 12px 30px;
+  }
+}
+@media (max-width: 500px) {
+  .proimage {
+    width: 70%;
+    margin-top: 40px;
+  }
+  .prodet {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+  .proright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

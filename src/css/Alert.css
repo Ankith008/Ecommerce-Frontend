@@ -6,13 +6,18 @@
   padding: 10px;
   color: black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  animation: slideDown 3s ease-in-out;
+  animation: slideDown 1s ease-in-out;
   background-color: white;
   border-radius: 4px;
   left: 50%;
-  transform: translate(-50%, -120%);
+  transform: translateX(-50%);
   height: auto;
   top: 10px;
+  transition: all linear 1s;
+}
+
+.parent {
+  transition: all ease 0.5s;
 }
 
 .alerthead {
@@ -25,23 +30,10 @@
 
 @keyframes slideDown {
   0% {
-    transform: translate(-50%, -100%);
-    opacity: 0;
+    top: -50%;
   }
-  20% {
-    transform: translate(-50%, 20%);
-    opacity: 1;
-  }
-  50% {
-    transform: translate(-50%, 10%);
-    opacity: 1;
-  }
-  80% {
-    transform: translate(-50%, 20%);
-    opacity: 1;
-  }
+
   100% {
-    transform: translate(-50%, -100%);
-    opacity: 0;
+    top: 10px;
   }
 }

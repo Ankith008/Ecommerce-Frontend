@@ -1,0 +1,104 @@
+.shopouter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.shophead {
+  text-align: center;
+  margin-top: 90px;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+.recommended {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 15px;
+}
+.reco {
+  padding: 7px 15px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  font-style: italic;
+  text-shadow: 1px 2px white;
+  border-radius: 7px;
+  cursor: pointer;
+  color: black;
+  width: 250px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 4px 4px 10px #000000, -2px -2px 5px 2px white;
+}
+@media (max-width: 781px) {
+  .reco {
+    width: 200px;
+    height: 120px;
+  }
+}
+@media (max-width: 631px) {
+  .reco {
+    width: 180px;
+    height: 100px;
+  }
+}
+@media (max-width: 564px) {
+  .reco {
+    width: 40%;
+    height: 30vw;
+  }
+}
+.festival {
+  background-image: url("../images/festival.jpg");
+  background-size: cover;
+}
+.party {
+  background-image: url("../images/party.jpg");
+  background-size: cover;
+}
+.winter {
+  background-image: url("../images/winter.jpeg");
+  background-size: cover;
+}
+.home {
+  background-image: url("../images/house.jpg");
+  background-size: cover;
+}
+.electronic {
+  background-image: url("../images/circuit.jpg");
+  background-size: cover;
+}
+.phone {
+  background-image: url("../images/phone.jpg");
+  background-size: cover;
+}
+.summer {
+  background-image: url("../images/summer.jpg");
+  background-size: cover;
+}
+.shoes {
+  background-image: url("../images/shoes.jpeg");
+  background-size: cover;
+}
+
+#search {
+  width: 80%;
+  background-color: transparent;
+}
+
+/* h4 {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+  text-shadow: 1px 1px 2px #000000;
+  font-style: oblique;
+}
+h4::selection {
+  background-color: transparent;
+  color: black;
+} */

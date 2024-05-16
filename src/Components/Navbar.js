@@ -4,12 +4,13 @@ import logo from "../images/logo2.png";
 import bar from "../images/bar.png";
 import cross from "../images/cross.png";
 import CreateContext from "../Context/CreateContext";
-import axios from "axios";
+import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { settingAuth } from "../actions";
 
 export default function Navbar() {
+  const keys = ["storeid", "productid", "type", "signup", "stores"];
   const dispatch = useDispatch();
   const {
     setshowloginoption,
@@ -21,10 +22,20 @@ export default function Navbar() {
   const [showhum, setshowhum] = useState(true);
   const navigate = useNavigate();
 
+  const companyclick = async () => {
+    const getauth = await localStorage.getItem("authorized");
+    if (getauth === "true") {
+      navigate("/profile");
+    } else {
+      await localStorage.setItem("signup", "Company_Signup");
+      navigate("/sign");
+    }
+  };
+
   const handlelogout = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/auth/logout",
+        "/auth/logout",
         {},
         {
           withCredentials: true,
@@ -32,17 +43,17 @@ export default function Navbar() {
       );
       if (response.data.success === true) {
         dispatch(settingAuth(""));
-        window.location.href = response.data.redirect;
         setalertdesc("You have been logged out successfully");
         setalerthead("Success");
         setshowalert(true);
         localStorage.setItem("authorized", false);
+        keys.map((key) => localStorage.removeItem(key));
+        navigate("/");
       }
     } catch (error) {
       setalerthead("Error");
       setalertdesc("Error logging out, Please Try Again");
       setshowalert(true);
-      console.error("Error logging out:", error);
       localStorage.setItem("authorized", true);
     }
   };
@@ -51,8 +62,13 @@ export default function Navbar() {
     <div>
       {shownav && (
         <nav className="larger">
-          <p className="logo">
-            <img className="logoimg" src={logo} alt="logo" />
+          <p className="logo" onClick={() => navigate("/")}>
+            <img
+              className="logoimg"
+              src={logo}
+              alt="logo"
+              onClick={() => navigate("/")}
+            />
             Kutta
           </p>
 
@@ -65,14 +81,8 @@ export default function Navbar() {
             >
               Home
             </li>
-            <li>Shop</li>
-            <li
-              onClick={() => {
-                navigate("/profile");
-              }}
-            >
-              Company
-            </li>
+            <li onClick={() => navigate("/shop")}>Shop</li>
+            <li onClick={companyclick}>Company</li>
             <li>Delivery</li>
             <li>Update</li>
             <li>Orders</li>
@@ -102,7 +112,14 @@ export default function Navbar() {
             >
               Home
             </li>
-            <li onClick={() => setshowhum(!showhum)}>Shop</li>
+            <li
+              onClick={() => {
+                setshowhum(!showhum);
+                navigate("/shop");
+              }}
+            >
+              Shop
+            </li>
             <li
               onClick={() => {
                 setshowhum(!showhum);
