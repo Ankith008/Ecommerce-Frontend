@@ -674,7 +674,7 @@ export default function Signup() {
           </button>
         </form>
       )}
-      {localsigup === "Delivery_Signup" && (
+      {/* {localsigup === "Delivery_Signup" && (
         <form
           className="UserSignup"
           onSubmit={handleDeliverysign}
@@ -769,7 +769,7 @@ export default function Signup() {
             Login
           </button>
         </form>
-      )}
+      )} */}
       {localsigup === "Store_Signup" && (
         <form
           className="UserSignup"
