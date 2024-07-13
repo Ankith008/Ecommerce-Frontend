@@ -58,6 +58,8 @@ export default function Navbar() {
     }
   };
 
+  const localsignup = localStorage.getItem("signup");
+
   return (
     <div>
       {shownav && (
@@ -82,11 +84,18 @@ export default function Navbar() {
               Home
             </li>
             <li onClick={() => navigate("/shop")}>Shop</li>
-            <li onClick={companyclick}>Company</li>
-            <li>Delivery</li>
-            <li>Update</li>
+            {(localsignup === "Company_Login" ||
+              localsignup === "Company_Signup") && (
+              <li onClick={companyclick}>Company</li>
+            )}
+            {/* <li>Delivery</li> */}
+            {/* <li>Update</li>
             <li>Orders</li>
-            <li>Your Carts</li>
+            <li>Your Carts</li> */}
+            {(localsignup === "User_signup" ||
+              localsignup === "User_Login") && (
+              <li onClick={() => navigate("/user")}>Profile</li>
+            )}
           </ul>
           <ul className="last">
             <li
@@ -120,19 +129,33 @@ export default function Navbar() {
             >
               Shop
             </li>
-            <li
-              onClick={() => {
-                setshowhum(!showhum);
-                navigate("/profile");
-              }}
-            >
-              Company
-            </li>
-            <li onClick={() => setshowhum(!showhum)}>Delivery</li>
+            {(localsignup === "Company_Signup" ||
+              localsignup === "Company_Login") && (
+              <li
+                onClick={() => {
+                  setshowhum(!showhum);
+                  navigate("/profile");
+                }}
+              >
+                Company
+              </li>
+            )}
+            {(localsignup === "User_Login" ||
+              localsignup === "User_signup") && (
+              <li
+                onClick={() => {
+                  setshowhum(!showhum);
+                  navigate("/user");
+                }}
+              >
+                Profile
+              </li>
+            )}
+            {/* <li onClick={() => setshowhum(!showhum)}>Delivery</li>
             <li onClick={() => setshowhum(!showhum)}>Orders</li>
             <li onClick={() => setshowhum(!showhum)}>Update</li>
-            <li onClick={() => setshowhum(!showhum)}>About Us</li>
-            <li onClick={() => setshowhum(!showhum)}>Your Carts</li>
+            <li onClick={() => setshowhum(!showhum)}>About Us</li> */}
+            {/* <li onClick={() => setshowhum(!showhum)}>Your Carts</li> */}
             <li
               onClick={() => {
                 setshowhum(!showhum);
