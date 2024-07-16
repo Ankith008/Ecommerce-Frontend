@@ -99,26 +99,26 @@ export default function Home() {
                 >
                   Company Login
                 </p>
-                // <p
-                //   onClick={async () => {
-                //     setshowloginoption(false);
-                //     await setloginoptions("Delivery_Signup");
-                //     localStorage.setItem("signup", "Delivery_Signup");
-                //     navigate("/sign");
-                //   }}
-                // >
-                //   Delivery Boy Signup
-                // </p>
-                // <p
-                //   onClick={async () => {
-                //     setshowloginoption(false);
-                //     await setloginoptions("Delivery_Login");
-                //     localStorage.setItem("signup", "Delivery_Login");
-                //     navigate("/sign");
-                //   }}
-                // >
-                //   Delivery Boy Login
-                // </p>
+                <p
+                  onClick={async () => {
+                    setshowloginoption(false);
+                    await setloginoptions("Delivery_Signup");
+                    localStorage.setItem("signup", "Delivery_Signup");
+                    navigate("/sign");
+                  }}
+                >
+                  Delivery Boy Signup
+                </p>
+                <p
+                  onClick={async () => {
+                    setshowloginoption(false);
+                    await setloginoptions("Delivery_Login");
+                    localStorage.setItem("signup", "Delivery_Login");
+                    navigate("/sign");
+                  }}
+                >
+                  Delivery Boy Login
+                </p>
               </div>
             </div>
           </section>
