@@ -99,7 +99,7 @@ export default function Home() {
                 >
                   Company Login
                 </p>
-                {/* <p
+                <p
                   onClick={async () => {
                     setshowloginoption(false);
                     await setloginoptions("Delivery_Signup");
@@ -108,8 +108,8 @@ export default function Home() {
                   }}
                 >
                   Delivery Boy Signup
-                </p> */}
-                {/* <p
+                </p>
+                <p
                   onClick={async () => {
                     setshowloginoption(false);
                     await setloginoptions("Delivery_Login");
@@ -118,7 +118,7 @@ export default function Home() {
                   }}
                 >
                   Delivery Boy Login
-                </p> */}
+                </p>
               </div>
             </div>
           </section>
