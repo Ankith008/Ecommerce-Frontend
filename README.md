@@ -6,9 +6,9 @@ Website link - [https://ecommerce-frontend-ten-beryl.vercel.app/](https://ecomme
 
 This project is an E-commerce website built to provide a seamless online shopping experience for users, as well as a comprehensive platform for companies to manage their products and stores. The platform allows users to search for products, purchase them, and track their delivery status. Companies can sign up, create stores, list products for sale, manage orders, and handle deliveries.
 
-## Features
+# Features
 
- #User Features:
+ # User Features:
 
 1. Signup/Login: Users can register and log in to access the platform.
 2. Product Search: Users can search for products by name or category.
