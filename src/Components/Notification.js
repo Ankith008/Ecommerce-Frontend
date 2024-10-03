@@ -175,7 +175,7 @@ export default function Notification() {
         </div>
       )}
       <div className="notificationresult">
-        {orders.length > 0 ? (
+        {orders?.length > 0 ? (
           orders.map((ele) => (
             <NotCard
               key={ele._id}
