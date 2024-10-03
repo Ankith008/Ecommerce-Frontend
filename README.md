@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# E-commerce Website Documentation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Website link - [Create React App](https://vercel.com/ankith008s-projects/ecommerce-frontend).
 
-## Available Scripts
+# Project Overview
 
-In the project directory, you can run:
+This project is an E-commerce website built to provide a seamless online shopping experience for users, as well as a comprehensive platform for companies to manage their products and stores. The platform allows users to search for products, purchase them, and track their delivery status. Companies can sign up, create stores, list products for sale, manage orders, and handle deliveries.
 
-### `npm start`
+# Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# User Features:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Signup/Login: Users can register and log in to access the platform.
+2. Product Search: Users can search for products by name or category.
+3. Product Purchase: Users can purchase products or add them to their cart.
+4. Order Tracking: Users can view the delivery status of their orders.
 
-### `npm test`
+# Company Features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Signup/Login: Companies can create accounts and log in to manage their business.
+2. Store Creation: Companies can create stores to sell their products.
+3. Store Management: Companies can manage the store profile, view store products, and update details.
+4. Order Management: Companies are responsible for processing and delivering products, and they can update delivery statuses.
+5. Product Management: Companies can add, update, or remove products from their stores.
 
-### `npm run build`
+# Technology Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. React.js: The frontend is built using React.js to provide an interactive and dynamic user 
+   interface.
+2. TailwindCSS: For designing responsive and consistent user interfaces.
+3. JWT (JSON Web Token): JWT rotation is implemented for secure user authentication, ensuring 
+   that user sessions are protected against token theft.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Backend
 
-### `npm run eject`
+1. Node.js: A JavaScript runtime environment that allows running server-side code.
+2. Express.js: A web application framework for Node.js used to build RESTful APIs for handling requests from the frontend.
+3. JWT Rotation: Used to ensure secure user sessions by periodically rotating tokens, protecting against potential session hijacking.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Database
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+MongoDB: A NoSQL database used to store user, company, product, and order information. The flexibility of MongoDB makes it ideal for handling various data types in the application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# User Flow
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. User Login/Signup: The user selects "User Signup" or "User Login" from the options. After successful login/signup, they are redirected to their home page.
+2. Product Browsing: Users can search for products and view details.
+3. Purchasing: Users can buy products or add them to their cart.
+4. Order Tracking: After purchase, users can track the delivery status of their orders.
 
-## Learn More
+# Company Flow
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Company Login/Signup: The company selects "Company Signup" or "Company Login." After logging in, they are redirected to their dashboard.
+2. Store Creation: Companies can create stores under their profile to list products.
+3. Store Management: Companies manage their stores and products.
+4. Order Management: Companies update the delivery status of orders, which is visible to users.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Security Features
 
-### Code Splitting
+1. JWT Token Rotation: JWT tokens are used for session management, with regular rotation to ensure security.
+2. Password Hashing: User and company passwords are secured using bcrypt hashing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This website provides an efficient and secure platform for both users and companies, ensuring smooth shopping and store management experiences.
